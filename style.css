@@ -1,23 +1,29 @@
-/* Custom properties for easy color changes */
+/* Custom properties using the provided blue palette */
 :root {
     /* --- NEW PALETTE --- */
-    --primary-text-color: #ffffff; /* Pure White */
-    --secondary-text-color: #a3b3cc; /* Soft Gray-Blue */
+    --curious-blue: #2688C5;
+    --viking: #4EC8DD;
+    --endeavour: #0857B2;
+    --shakespeare: #44B4D4;
 
-    /* Background Gradient (Deep Blue/Violet) */
-    --background-start: #1a2948; /* Dark Sapphire Blue */
-    --background-end: #3b2c58; /* Deep Indigo/Violet */
+    /* Base Colors */
+    --primary-text-color: #ffffff; /* White for main titles/buttons */
+    --secondary-text-color: #c0deed; /* Very light blue for subtle text */
+    
+    /* Background Gradient (Deep to Light Blue) */
+    --background-start: var(--endeavour); /* Deepest blue for a solid base */
+    --background-end: var(--curious-blue); 
 
-    /* Card/Image Placeholder Gradient (Vibrant Sky) */
-    --placeholder-gradient-start: #66ccff; /* Bright Sky Blue */
-    --placeholder-gradient-end: #d999ff; /* Soft Lavender/Pink */
+    /* Card/Image Placeholder Gradient (Light and Vibrant) */
+    --placeholder-gradient-start: var(--viking); 
+    --placeholder-gradient-end: var(--shakespeare); 
     --placeholder-land: #479e4d; /* Standard Green Land - kept for contrast */
     
     /* UI Elements */
-    --button-bg: #4c4a6c; /* Muted Purple/Gray Button */
-    --button-hover: #5d5b80;
-    --logo-color: #f0f0f0; /* Off-White for header text */
-    --navbar-text-color: #c9d5e8; /* Lighter blue for subtle links */
+    --button-bg: var(--endeavour); /* Use deep blue for the button */
+    --button-hover: #1e6ab9; /* Slightly lighter deep blue */
+    --logo-color: var(--primary-text-color); /* White for header text */
+    --navbar-text-color: var(--secondary-text-color); /* Light blue for subtle links */
 }
 
 /* Global Reset and Base Styles */
@@ -40,7 +46,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    padding: 30px 0; /* Add some vertical padding */
+    padding: 30px 0;
 }
 
 .container {
@@ -80,7 +86,7 @@ body {
 .profile-icon {
     width: 35px;
     height: 35px;
-    background-color: var(--placeholder-gradient-start);
+    background-color: var(--viking); /* Using a bright blue from the palette */
     border-radius: 50%;
     border: 2px solid var(--primary-text-color);
 }
@@ -88,7 +94,6 @@ body {
 /* --- Main Content --- */
 
 .main-content {
-    /* Two distinct sections visually separated */
     display: flex;
     flex-direction: column;
     gap: 40px;
@@ -124,7 +129,7 @@ body {
     line-height: 1;
     margin-bottom: 10px;
     color: var(--primary-text-color);
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15); /* Slightly darker shadow */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
 }
 
 .status-ongoing {
@@ -146,7 +151,7 @@ body {
     font-weight: 600;
     letter-spacing: 1px;
     transition: background-color 0.2s, transform 0.1s;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Add subtle shadow */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .listen-button:hover {
@@ -155,7 +160,7 @@ body {
 }
 
 .featured-image {
-    width: 300px; /* Specific width for the featured image */
+    width: 300px;
     height: 350px;
     flex-shrink: 0;
 }
@@ -164,7 +169,7 @@ body {
 
 .other-uploads-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Four columns */
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     padding-bottom: 50px;
 }
@@ -183,13 +188,13 @@ body {
     margin-top: 10px;
     padding: 0 5px;
     line-height: 1.3;
-    color: var(--navbar-text-color); /* Use lighter blue for subtle titles */
+    color: var(--navbar-text-color);
 }
 
 /* Placeholder Card Styling (mimics the colorful image blocks) */
 .placeholder-card {
     width: 100%;
-    aspect-ratio: 1 / 1.3; /* Tall rectangular shape */
+    aspect-ratio: 1 / 1.3;
     background: linear-gradient(
         to bottom,
         var(--placeholder-gradient-start),
@@ -201,7 +206,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Add depth */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .placeholder-card::before {
@@ -228,7 +233,7 @@ body {
     top: 20%;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 1; /* Above the 'land' */
+    z-index: 1;
 }
 
 .cloud::before, .cloud::after {
@@ -252,7 +257,7 @@ body {
     right: -20%;
 }
 
-/* Responsive Adjustments */
+/* Responsive Adjustments (Kept from previous version) */
 @media (max-width: 950px) {
     .novel-title {
         font-size: 3rem;
@@ -277,7 +282,7 @@ body {
         text-align: center;
     }
     .text-content {
-        order: 2; /* Move text content below image on small screens */
+        order: 2;
     }
     .featured-image {
         order: 1;
