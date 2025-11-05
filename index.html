@@ -1,300 +1,297 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NovelWave</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    /* ---------- GLOBAL ---------- */
-    body {
-      background: #585858;
-      font-family: 'Inter', Arial, sans-serif;
-      margin: 0;
-      color: #fff;
-      line-height: 1.5;
-    }
-    a {
-      text-decoration: none;
-      color: inherit;
+    :root {
+      --bg-color: #f5f5f5;
+      --card-bg: #ffffff;
+      --text-color: #222;
+      --accent-color: #444;
+      --button-bg: #222;
+      --button-text: #fff;
+      --shadow-color: rgba(0, 0, 0, 0.1);
     }
 
-    /* ---------- NAVBAR ---------- */
-    .navbar {
-      background: #6b6b6b;
+    body.dark {
+      --bg-color: #585858;
+      --card-bg: #4a4a4a;
+      --text-color: #ffffff;
+      --accent-color: #ccc;
+      --button-bg: #ccc;
+      --button-text: #222;
+      --shadow-color: rgba(0, 0, 0, 0.3);
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Header */
+    header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 1rem 2rem;
-      border-radius: 12px;
-      margin: 1.5rem auto 0 auto;
-      max-width: 1200px;
+      background-color: var(--card-bg);
+      box-shadow: 0 2px 10px var(--shadow-color);
       flex-wrap: wrap;
-      position: relative;
+      gap: 1rem;
     }
 
-    .brand {
-      font-weight: bold;
-      font-size: 1.6em;
+    .logo {
+      font-weight: 700;
       letter-spacing: 1px;
+      font-size: 1.4rem;
     }
 
-    .navbar-links {
+    nav {
       display: flex;
-      gap: 2rem;
       align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
     }
 
-    .navbar-links a {
+    nav a {
+      text-decoration: none;
+      color: var(--text-color);
       font-weight: 600;
-      letter-spacing: 1.2px;
-      transition: color 0.2s;
+      font-size: 0.95rem;
+      transition: opacity 0.2s ease;
     }
 
-    .navbar-links a:hover {
-      color: #a5c46b;
+    nav a:hover {
+      opacity: 0.7;
     }
 
     .profile-pic {
-      width: 45px;
-      height: 45px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
-      background: url('https://placehold.co/60x60/94c356/fff?text= ') no-repeat center/cover;
-      border: 2px solid #a5c46b;
-      flex-shrink: 0;
+      object-fit: cover;
+      background-color: #ccc;
+      border: 2px solid var(--accent-color);
     }
 
-    /* ---------- MOBILE MENU ---------- */
-    .menu-toggle {
-      display: none;
-      background: none;
+    /* Theme toggle button */
+    .theme-toggle {
+      background-color: var(--button-bg);
+      color: var(--button-text);
       border: none;
-      color: #fff;
-      font-size: 1.8rem;
-      cursor: pointer;
-    }
-
-    @media (max-width: 900px) {
-      .menu-toggle {
-        display: block;
-      }
-
-      .navbar-links {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        background: #5a5a5a;
-        border-radius: 8px;
-        margin-top: 10px;
-        padding: 10px 0;
-      }
-
-      .navbar-links.active {
-        display: flex;
-      }
-    }
-
-    /* ---------- MAIN CONTENT ---------- */
-    .main-content {
-      margin: 2rem auto;
-      background: #494949;
-      border-radius: 16px;
-      padding: 2rem;
-      display: flex;
-      gap: 2rem;
-      align-items: flex-start;
-      max-width: 1200px;
-      flex-wrap: wrap;
-    }
-
-    .left-section {
-      flex: 2;
-      min-width: 250px;
-    }
-
-    .left-section h2 {
-      font-family: 'Fira Mono', monospace;
-      font-size: 1.3em;
-      margin: 0 0 10px 0;
-      font-weight: bold;
-    }
-
-    .series-title {
-      font-family: 'Georgia', serif;
-      font-style: italic;
-      font-size: 2.4em;
-      font-weight: bold;
-      margin: 0 0 5px 0;
-    }
-
-    .status {
-      font-family: 'Georgia', serif;
-      font-style: italic;
-      color: #ddd;
-      font-size: 1.1em;
-      margin-bottom: 14px;
-    }
-
-    .listen-btn {
-      display: inline-block;
-      margin-top: 14px;
-      padding: 12px 36px;
-      background: #b3b3b3;
-      color: #fff;
-      font-weight: bold;
-      border: none;
+      padding: 0.5rem 1rem;
       border-radius: 8px;
-      font-size: 1.1em;
-      letter-spacing: 1px;
+      font-weight: 600;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.3s;
     }
 
-    .listen-btn:hover {
-      background: #d1d1d1;
-      color: #222;
-      transform: scale(1.03);
+    .theme-toggle:hover {
+      opacity: 0.8;
     }
 
-    .main-image {
-      flex: 1;
-      width: 100%;
-      max-width: 400px;
-      aspect-ratio: 16 / 9;
-      background: url('https://placehold.co/400x225/99c063/ffffff?text= ') no-repeat center/cover;
-      border-radius: 14px;
-    }
-
-    /* ---------- RECENT UPLOADS ---------- */
-    .recent-uploads {
-      background: #494949;
-      border-radius: 16px;
-      margin: 0 auto 2rem auto;
-      padding: 2rem;
+    /* Main Container */
+    main {
       display: flex;
+      flex-direction: column;
       gap: 1.5rem;
-      flex-wrap: wrap;
-      justify-content: center;
+      padding: 1rem;
       max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Upload Section */
+    .upload-section {
+      background-color: var(--card-bg);
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      box-shadow: 0 2px 8px var(--shadow-color);
+      transition: background-color 0.3s;
+    }
+
+    .upload-text {
+      flex: 1 1 300px;
+    }
+
+    .upload-text h3 {
+      margin: 0;
+      font-size: 1rem;
+      letter-spacing: 1px;
+    }
+
+    .upload-text h1 {
+      font-family: "Georgia", serif;
+      font-style: italic;
+      font-size: 2.2rem;
+      margin: 0.3rem 0;
+      line-height: 1.2;
+    }
+
+    .upload-text p {
+      font-style: italic;
+      color: var(--accent-color);
+      margin: 0.3rem 0 1rem;
+    }
+
+    .upload-text a {
+      display: inline-block;
+      background-color: var(--button-bg);
+      color: var(--button-text);
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s ease;
+    }
+
+    .upload-text a:hover {
+      opacity: 0.8;
+    }
+
+    .upload-image img {
+      width: 240px;
+      height: 240px;
+      border-radius: 10px;
+      object-fit: cover;
+      background-color: #ccc;
+    }
+
+    /* Card Grid */
+    .card-section {
+      background-color: var(--card-bg);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 8px var(--shadow-color);
+      transition: background-color 0.3s;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1.5rem;
     }
 
     .card {
-      flex: 1 1 180px;
-      max-width: 200px;
-      text-align: left;
+      text-align: center;
     }
 
-    .card-image {
+    .card img {
       width: 100%;
-      aspect-ratio: 4 / 3;
-      background: url('https://placehold.co/200x150/9ac24b/fff?text= ') no-repeat center/cover;
+      aspect-ratio: 3/4;
       border-radius: 10px;
-      margin-bottom: 10px;
+      background-color: #ccc;
+      object-fit: cover;
     }
 
-    .card .title {
-      font-size: 1em;
-      font-weight: bold;
-      letter-spacing: 0.8px;
+    .card p {
+      margin-top: 0.6rem;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-transform: uppercase;
     }
 
-    /* ---------- RESPONSIVE TUNING ---------- */
-    @media (max-width: 900px) {
-      .main-content {
+    /* Responsive */
+    @media (max-width: 768px) {
+      .upload-text h1 {
+        font-size: 1.8rem;
+      }
+
+      .upload-image img {
+        width: 200px;
+        height: 200px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      nav {
+        justify-content: center;
+      }
+
+      .upload-section {
         flex-direction: column;
-        align-items: center;
-      }
-      .main-image {
-        width: 100%;
-        max-width: 500px;
-        aspect-ratio: 16 / 9;
-        margin-top: 1rem;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .main-image {
-        aspect-ratio: 3 / 2;
-        max-width: 100%;
+        align-items: flex-start;
       }
 
-      .card {
-        flex: 1 1 45%;
-        max-width: 160px;
-      }
-
-      .card-image {
-        aspect-ratio: 1 / 1;
-      }
-
-      .listen-btn {
-        width: 100%;
+      .upload-text {
         text-align: center;
       }
-    }
 
-    @media (max-width: 400px) {
-      .brand {
-        font-size: 1.3em;
-      }
-
-      .card {
-        flex: 1 1 100%;
-        max-width: 100%;
-      }
-
-      .card-image {
-        aspect-ratio: 4 / 3;
-      }
-
-      .profile-pic {
-        width: 38px;
-        height: 38px;
+      .upload-image img {
+        width: 150px;
+        height: 150px;
+        margin: 0 auto;
       }
     }
   </style>
 </head>
 <body>
 
-  <nav class="navbar">
-    <span class="brand">NOVELWAVE</span>
-    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-    <div class="navbar-links" id="menu">
+  <header>
+    <div class="logo">NOVELWAVE</div>
+    <nav>
       <a href="#">YOUTUBE</a>
       <a href="#">INSTAGRAM</a>
       <a href="#">BUY ME A COFFEE</a>
-    </div>
-    <span class="profile-pic"></span>
-  </nav>
+      <button class="theme-toggle" id="themeToggle">🌙 Dark Mode</button>
+      <img class="profile-pic" src="https://via.placeholder.com/60" alt="Profile">
+    </nav>
+  </header>
 
-  <div class="main-content">
-    <div class="left-section">
-      <h2>CURRENTLY UPLOADING</h2>
-      <div class="series-title">REVEREND INSANITY</div>
-      <div class="status">status ongoing</div>
-      <a class="listen-btn" href="#">LISTEN NOW</a>
-    </div>
-    <div class="main-image"></div>
-  </div>
+  <main>
+    <section class="upload-section">
+      <div class="upload-text">
+        <h3>CURRENTLY UPLOADING</h3>
+        <h1><em>REVEREND<br>INSANITY</em></h1>
+        <p>status ongoing</p>
+        <a href="#">LISTEN NOW</a>
+      </div>
+      <div class="upload-image">
+        <img src="https://via.placeholder.com/240x240.png?text=Cover" alt="Reverend Insanity">
+      </div>
+    </section>
 
-  <div class="recent-uploads">
-    <div class="card">
-      <div class="card-image"></div>
-      <div class="title">OMNISCIENT READER'S POINT OF VIEW</div>
-    </div>
-    <div class="card">
-      <div class="card-image"></div>
-      <div class="title">SHADOW SLAVE</div>
-    </div>
-    <div class="card">
-      <div class="card-image"></div>
-      <div class="title">RE:ZERO</div>
-    </div>
-  </div>
+    <section class="card-section">
+      <div class="card-grid">
+        <div class="card">
+          <img src="https://via.placeholder.com/160x220.png?text=Cover" alt="">
+          <p>Omniscient Reader’s Point of View</p>
+        </div>
+        <div class="card">
+          <img src="https://via.placeholder.com/160x220.png?text=Cover" alt="">
+          <p>Shadow Salve</p>
+        </div>
+        <div class="card">
+          <img src="https://via.placeholder.com/160x220.png?text=Cover" alt="">
+          <p>Shadow Salve</p>
+        </div>
+        <div class="card">
+          <img src="https://via.placeholder.com/160x220.png?text=Cover" alt="">
+          <p>Re:Zero</p>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <script>
-    function toggleMenu() {
-      document.getElementById('menu').classList.toggle('active');
-    }
+    const toggleBtn = document.getElementById("themeToggle");
+    const body = document.body;
+
+    toggleBtn.addEventListener("click", () => {
+      body.classList.toggle("dark");
+      const darkMode = body.classList.contains("dark");
+      toggleBtn.textContent = darkMode ? "☀️ Light Mode" : "🌙 Dark Mode";
+    });
   </script>
+
 </body>
 </html>
