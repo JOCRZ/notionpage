@@ -5,7 +5,7 @@
   <title>NovelWave</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    /* ---------- GLOBAL STYLES ---------- */
+    /* ---------- GLOBAL ---------- */
     body {
       background: #585858;
       font-family: 'Inter', Arial, sans-serif;
@@ -13,16 +13,9 @@
       color: #fff;
       line-height: 1.5;
     }
-
     a {
       text-decoration: none;
       color: inherit;
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 10px;
     }
 
     /* ---------- NAVBAR ---------- */
@@ -52,15 +45,12 @@
     }
 
     .navbar-links a {
-      color: #fff;
       font-weight: 600;
       letter-spacing: 1.2px;
-      font-size: 1em;
       transition: color 0.2s;
     }
 
-    .navbar-links a:hover,
-    .navbar-links a:focus {
+    .navbar-links a:hover {
       color: #a5c46b;
     }
 
@@ -73,7 +63,7 @@
       flex-shrink: 0;
     }
 
-    /* ---------- MOBILE NAV TOGGLE ---------- */
+    /* ---------- MOBILE MENU ---------- */
     .menu-toggle {
       display: none;
       background: none;
@@ -81,6 +71,26 @@
       color: #fff;
       font-size: 1.8rem;
       cursor: pointer;
+    }
+
+    @media (max-width: 900px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .navbar-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: #5a5a5a;
+        border-radius: 8px;
+        margin-top: 10px;
+        padding: 10px 0;
+      }
+
+      .navbar-links.active {
+        display: flex;
+      }
     }
 
     /* ---------- MAIN CONTENT ---------- */
@@ -147,9 +157,10 @@
 
     .main-image {
       flex: 1;
-      min-width: 200px;
-      height: 220px;
-      background: url('https://placehold.co/300x200/99c063/ffffff?text= ') no-repeat center/cover;
+      width: 100%;
+      max-width: 400px;
+      aspect-ratio: 16 / 9;
+      background: url('https://placehold.co/400x225/99c063/ffffff?text= ') no-repeat center/cover;
       border-radius: 14px;
     }
 
@@ -167,66 +178,52 @@
     }
 
     .card {
-      width: 155px;
+      flex: 1 1 180px;
+      max-width: 200px;
       text-align: left;
-      flex: 1 1 140px;
-      max-width: 180px;
     }
 
     .card-image {
       width: 100%;
-      height: 125px;
-      background: url('https://placehold.co/155x125/9ac24b/fff?text= ') no-repeat center/cover;
+      aspect-ratio: 4 / 3;
+      background: url('https://placehold.co/200x150/9ac24b/fff?text= ') no-repeat center/cover;
       border-radius: 10px;
       margin-bottom: 10px;
     }
 
     .card .title {
-      color: #fff;
       font-size: 1em;
       font-weight: bold;
       letter-spacing: 0.8px;
     }
 
-    /* ---------- RESPONSIVE BREAKPOINTS ---------- */
+    /* ---------- RESPONSIVE TUNING ---------- */
     @media (max-width: 900px) {
-      .navbar-links {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        background: #5a5a5a;
-        border-radius: 8px;
-        margin-top: 10px;
-        padding: 10px 0;
-      }
-
-      .navbar-links.active {
-        display: flex;
-      }
-
-      .menu-toggle {
-        display: block;
-      }
-
       .main-content {
         flex-direction: column;
         align-items: center;
       }
-
       .main-image {
         width: 100%;
-        height: 250px;
+        max-width: 500px;
+        aspect-ratio: 16 / 9;
         margin-top: 1rem;
       }
     }
 
     @media (max-width: 600px) {
+      .main-image {
+        aspect-ratio: 3 / 2;
+        max-width: 100%;
+      }
+
       .card {
         flex: 1 1 45%;
+        max-width: 160px;
       }
 
       .card-image {
-        height: 100px;
+        aspect-ratio: 1 / 1;
       }
 
       .listen-btn {
@@ -238,6 +235,15 @@
     @media (max-width: 400px) {
       .brand {
         font-size: 1.3em;
+      }
+
+      .card {
+        flex: 1 1 100%;
+        max-width: 100%;
+      }
+
+      .card-image {
+        aspect-ratio: 4 / 3;
       }
 
       .profile-pic {
@@ -290,6 +296,5 @@
       document.getElementById('menu').classList.toggle('active');
     }
   </script>
-
 </body>
 </html>
