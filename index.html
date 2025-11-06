@@ -135,9 +135,8 @@
     .upload-image img {
       width: 400px;
       height: 600px;
-      max-width: 100%;
       border-radius: 12px;
-      object-fit: cover;
+      object-fit: contain; /* ✅ ensures full image fits without zoom/crop */
       background-color: #ccc;
       box-shadow: 0 4px 10px var(--shadow-color);
     }
@@ -176,9 +175,10 @@
       height: 600px;
       max-width: 100%;
       border-radius: 10px;
-      object-fit: cover;
+      object-fit: contain; /* ✅ no zoom, full image visible */
       display: block;
       margin: 0 auto;
+      background-color: #ccc;
     }
 
     .card p {
@@ -254,19 +254,19 @@
     <section class="card-section">
       <div class="card-grid">
         <div class="card">
-          <img src="Data/ORV.png" alt="">
+          <img src="Data/ORV.png" alt="Omniscient Reader’s Point of View">
           <p>Omniscient Reader’s Point of View</p>
         </div>
         <div class="card">
-          <img src="Data/SS.png" alt="">
+          <img src="Data/SS.png" alt="Shadow Slave">
           <p>Shadow Slave</p>
         </div>
         <div class="card">
-          <img src="Data/LOTM.png" alt="">
+          <img src="Data/LOTM.png" alt="The Lord of Mysteries">
           <p>The Lord of Mysteries</p>
         </div>
         <div class="card">
-          <img src="Data/TBATE.png" alt="">
+          <img src="Data/TBATE.png" alt="The Beginning After The End">
           <p>The Beginning After The End</p>
         </div>
       </div>
