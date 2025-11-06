@@ -36,7 +36,6 @@
       min-height: 100vh;
     }
 
-    /* Header */
     header {
       display: flex;
       justify-content: space-between;
@@ -84,7 +83,6 @@
       opacity: 0.8;
     }
 
-    /* Main Layout */
     main {
       flex: 1;
       display: flex;
@@ -95,7 +93,6 @@
       margin: 0 auto;
     }
 
-    /* Upload Section */
     .upload-section {
       background-color: var(--card-bg);
       border-radius: 16px;
@@ -149,15 +146,14 @@
     }
 
     .upload-image img {
-      width: clamp(180px, 40vw, 240px);
-      height: auto;
+      width: 400px;
+      height: 600px;
       border-radius: 12px;
       object-fit: cover;
       background-color: #ccc;
       box-shadow: 0 4px 10px var(--shadow-color);
     }
 
-    /* Card Grid */
     .card-section {
       background-color: var(--card-bg);
       border-radius: 16px;
@@ -167,7 +163,7 @@
 
     .card-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 1rem;
     }
 
@@ -185,10 +181,13 @@
     }
 
     .card img {
-      width: 100%;
-      aspect-ratio: 3 / 4;
+      width: 400px;
+      height: 600px;
+      max-width: 100%;
+      border-radius: 10px;
       object-fit: cover;
       display: block;
+      margin: 0 auto;
     }
 
     .card p {
@@ -198,7 +197,6 @@
       line-height: 1.3;
     }
 
-    /* Footer */
     footer {
       background-color: var(--card-bg);
       padding: 1rem 0;
@@ -224,7 +222,6 @@
       opacity: 0.6;
     }
 
-    /* Responsive Tweaks */
     @media (min-width: 600px) {
       footer nav {
         flex-direction: row;
@@ -269,19 +266,19 @@
     <section class="card-section">
       <div class="card-grid">
         <div class="card">
-          <img src="https://via.placeholder.com/160x220.png?text=Cover" alt="">
+          <img src="https://via.placeholder.com/400x600.png?text=Cover" alt="">
           <p>Omniscient Reader’s Point of View</p>
         </div>
         <div class="card">
-          <img src="https://via.placeholder.com/160x220.png?text=Cover" alt="">
+          <img src="https://via.placeholder.com/400x600.png?text=Cover" alt="">
           <p>Shadow Slave</p>
         </div>
         <div class="card">
-          <img src="https://via.placeholder.com/160x220.png?text=Cover" alt="">
+          <img src="https://via.placeholder.com/400x600.png?text=Cover" alt="">
           <p>Solo Leveling</p>
         </div>
         <div class="card">
-          <img src="https://via.placeholder.com/160x220.png?text=Cover" alt="">
+          <img src="https://via.placeholder.com/400x600.png?text=Cover" alt="">
           <p>Re:Zero</p>
         </div>
       </div>
@@ -302,8 +299,8 @@
 
     toggleBtn.addEventListener("click", () => {
       body.classList.toggle("dark");
-      toggleBtn.textContent = body.classList.contains("dark") 
-        ? "☀️ Light Mode" 
+      toggleBtn.textContent = body.classList.contains("dark")
+        ? "☀️ Light Mode"
         : "🌙 Dark Mode";
     });
   </script>
