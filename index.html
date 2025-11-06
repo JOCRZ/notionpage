@@ -189,3 +189,107 @@
     footer {
       background-color: var(--card-bg);
       padding: 1rem 0;
+      text-align: center;
+      box-shadow: 0 -2px 8px var(--shadow-color);
+    }
+
+    footer nav {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    footer a {
+      color: var(--text-color);
+      text-decoration: none;
+      font-weight: 600;
+      transition: opacity 0.3s;
+    }
+
+    footer a:hover {
+      opacity: 0.6;
+    }
+
+    @media (min-width: 600px) {
+      footer nav {
+        flex-direction: row;
+        justify-content: center;
+        gap: 1.5rem;
+      }
+
+      .upload-section {
+        flex-direction: row;
+        text-align: left;
+      }
+
+      .upload-text {
+        flex: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">NOVELWAVE</div>
+    <button class="theme-toggle" id="themeToggle">🌙 Dark Mode</button>
+  </header>
+
+  <main>
+    <section class="upload-section">
+      <div class="upload-text">
+        <h3>CURRENTLY UPLOADING</h3>
+        <h1><em>REVEREND<br>INSANITY</em></h1>
+        <p>Status: Ongoing</p>
+        <a href="#">LISTEN NOW</a>
+      </div>
+      <div class="upload-image">
+        <img src="Data/RI.png" alt="Reverend Insanity">
+      </div>
+    </section>
+
+    <section class="card-section">
+      <div class="card-grid">
+        <div class="card">
+          <img src="Data/ORV.png" alt="Omniscient Reader’s Point of View">
+          <p>Omniscient Reader’s Point of View</p>
+        </div>
+        <div class="card">
+          <img src="Data/SS.png" alt="Shadow Slave">
+          <p>Shadow Slave</p>
+        </div>
+        <div class="card">
+          <img src="Data/LOTM.png" alt="The Lord of Mysteries">
+          <p>The Lord of Mysteries</p>
+        </div>
+        <div class="card">
+          <img src="Data/TBATE.png" alt="The Beginning After The End">
+          <p>The Beginning After The End</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <nav>
+      <a href="#">YouTube</a>
+      <a href="#">Instagram</a>
+      <a href="#">Buy Me a Coffee</a>
+    </nav>
+  </footer>
+
+  <script>
+    const toggleBtn = document.getElementById("themeToggle");
+    const body = document.body;
+
+    toggleBtn.addEventListener("click", () => {
+      body.classList.toggle("dark");
+      toggleBtn.textContent = body.classList.contains("dark")
+        ? "☀️ Light Mode"
+        : "🌙 Dark Mode";
+    });
+  </script>
+
+</body>
+</html>
