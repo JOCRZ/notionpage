@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reverend Insanity - Episodes | NovelWave</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Georgia:ital@1&display=swap" rel="stylesheet">
+  <style>
+    /* Adopted styles from index.html for consistency */
+    @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
+
+    :root {
+      --bg-color: #f5f5f5;
+      --card-bg: #ffffff;
+      --text-color: #222;
+      --accent-color: #666;
+      --button-bg: #222;
+      --button-text: #fff;
+      --shadow-color: rgba(0, 0, 0, 0.1);
+      --episode-bg: #222; /* Specific to episode grid */
+      --episode-text: #fff;
+      --episode-hover: #444;
+      --episode-active: #0a0a0a;
+    }
+
+    body.dark {
+      --bg-color: #2e2e2e;
+      --card-bg: #3b3b3b;
+      --text-color: #fff;
+      --accent-color: #ccc;
+      --button-bg: #ccc;
+      --button-text: #222;
+      --shadow-color: rgba(0, 0, 0, 0.4);
+      --episode-bg: #2d2d2d; /* Dark background for the episode section */
+      --episode-text: #fff;
+      --episode-hover: #4a4a4a;
+      --episode-active: #000;
+      --episode-selected-bg: #000;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: background-color 0.4s ease, color 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      background-color: var(--card-bg);
+      box-shadow: 0 2px 10px var(--shadow-color);
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: clamp(1.2rem, 2vw, 1.5rem);
+      letter-spacing: 1.5px;
+      color: var(--text-color);
+      text-decoration: none;
+    }
+
+    .theme-toggle {
+      background-color: var(--button-bg);
+      color: var(--button-text);
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      opacity: 0.8;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      padding: 1rem;
+      max-width: 1200px; /* Increased max-width for the episode grid */
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* --- Episode Grid Styling --- */
+
+    .episode-container {
+      background-color: var(--episode-bg);
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 10px var(--shadow-color);
+      color: var(--episode-text);
+    }
+
+    .episode-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 0.5rem;
+    }
+
+    .episode-header h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .controls {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .search-bar {
+        position: relative;
+    }
+
+    .search-input {
+        background-color: var(--episode-bg);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: var(--episode-text);
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        width: 0;
+        opacity: 0;
+        visibility: hidden;
+        transition: width 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
+        margin-right: 0.5rem;
+    }
+
+    .search-input.active {
+        width: 150px;
+        opacity: 1;
+        visibility: visible;
+        padding: 0.5rem 1rem;
+    }
+    
+    .control-button {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--episode-text);
+      border: none;
+      padding: 0.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 40px;
+    }
+
+    .control-button:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    
+    /* Dropdown for episode range (001-100) */
+    .range-selector {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 600;
+        font-size: 1rem;
+        margin: 0 1rem;
+    }
+
+    .range-selector span {
+        cursor: pointer;
+        padding: 0.2rem;
+        transition: opacity 0.3s;
+    }
+
+    .range-selector span:hover {
+        opacity: 0.7;
+    }
+    
+    .episode-navigation {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .episode-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); /* Adjusted for more columns */
+      gap: 0.7rem;
+    }
+
+    .episode-link {
+      background: var(--episode-bg);
+      color: var(--episode-text);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.8rem 0;
+      border-radius: 8px;
+      text-align: center;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      font-size: 0.9rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .episode-link:hover {
+      background: var(--episode-hover);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .episode-link.current-chapter {
+      background: var(--button-bg); /* Use the main button color for active/selected */
+      border-color: var(--button-bg);
+      color: var(--button-text);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    body.dark .episode-link.current-chapter {
+        background: var(--button-bg);
+        color: var(--button-text);
+    }
+
+    /* Footer styling (copied from index.html) */
+    footer {
+      background-color: var(--card-bg);
+      padding: 1rem 0;
+      text-align: center;
+      box-shadow: 0 -2px 8px var(--shadow-color);
+      margin-top: auto;
+    }
+
+    footer nav {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    footer a {
+      color: var(--text-color);
+      text-decoration: none;
+      font-weight: 600;
+      transition: opacity 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    footer a:hover {
+      opacity: 0.6;
+    }
+
+    @media (min-width: 600px) {
+      footer nav {
+        flex-direction: row;
+        justify-content: center;
+        gap: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body class="dark">
+
+  <header>
+    <a href="index.html" class="logo">NOVELWAVE</a>
+    <button class="theme-toggle" id="themeToggle">☀️ Light Mode</button>
+  </header>
+
+  <main>
+    <div class="episode-container">
+      <div class="episode-header">
+        <h2>Episodes</h2>
+        <div class="controls">
+          <div class="search-bar">
+            <input type="number" id="searchInput" class="search-input" placeholder="Chapter #" min="1">
+            <button class="control-button" id="findButton"># Find</button>
+          </div>
+          <button class="control-button" title="Closed Captions"><i class="fas fa-closed-captioning"></i></button>
+          <button class="control-button" title="Speed/Settings"><i class="fas fa-cog"></i></button>
+        </div>
+      </div>
+
+      <div class="episode-navigation">
+        <span class="range-selector-arrow"><i class="fas fa-chevron-left"></i></span>
+        <div class="range-selector">001-100</div>
+        <span class="range-selector-arrow"><i class="fas fa-chevron-right"></i></span>
+      </div>
+
+      <div class="episode-grid" id="episodeGrid">
+        </div>
+    </div>
+    
+    </main>
+
+  <footer>
+    <nav>
+      <a href="#" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
+      <a href="#" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+      <a href="#" target="_blank"><i class="fas fa-mug-hot"></i> Buy Me a Coffee</a>
+    </nav>
+  </footer>
+
+  <script>
+    // Theme Toggle Functionality (Copied from index.html)
+    const toggleBtn = document.getElementById("themeToggle");
+    const body = document.body;
+
+    // Set initial state based on the body class (assuming dark by default here)
+    if (body.classList.contains("dark")) {
+        toggleBtn.textContent = "☀️ Light Mode";
+    } else {
+        toggleBtn.textContent = "🌙 Dark Mode";
+    }
+
+    toggleBtn.addEventListener("click", () => {
+      body.classList.toggle("dark");
+      // Save theme preference (optional, but good practice)
+      localStorage.setItem('theme', body.classList.contains("dark") ? 'dark' : 'light');
+
+      toggleBtn.textContent = body.classList.contains("dark")
+        ? "☀️ Light Mode"
+        : "🌙 Dark Mode";
+    });
+
+    // Apply saved theme preference on load (optional)
+    document.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.classList.add('dark');
+            toggleBtn.textContent = "☀️ Light Mode";
+        } else if (savedTheme === 'light') {
+             body.classList.remove('dark');
+             toggleBtn.textContent = "🌙 Dark Mode";
+        } else {
+             // Default to dark mode if no preference is saved, matching the HTML
+             body.classList.add('dark');
+             toggleBtn.textContent = "☀️ Light Mode";
+        }
+    });
+
+
+    // --- Chapter Grid Generation ---
+    const episodeGrid = document.getElementById('episodeGrid');
+    const totalChapters = 100; // Change this to the actual total number of chapters
+    const currentChapter = 57; // Example: Chapter 57 is currently selected
+
+    function generateChapterLinks() {
+        episodeGrid.innerHTML = ''; // Clear existing content
+        for (let i = 1; i <= totalChapters; i++) {
+            const link = document.createElement('a');
+            link.href = `#chapter-${i}`; // Use a fragment ID for navigation
+            link.className = 'episode-link';
+            link.textContent = i;
+            
+            // Highlight the current chapter
+            if (i === currentChapter) {
+                link.classList.add('current-chapter');
+            }
+            
+            // *** IMPORTANT: This is where you would link to your actual audio content ***
+            // Example: link.href = `path/to/audio/chapter-${i}.mp3`;
+            
+            episodeGrid.appendChild(link);
+        }
+    }
+    
+    // Initial generation
+    generateChapterLinks();
+    
+    // --- Find Chapter Functionality ---
+    const findButton = document.getElementById('findButton');
+    const searchInput = document.getElementById('searchInput');
+
+    findButton.addEventListener('click', () => {
+        // 1. Toggle the visibility of the input field
+        const isActive = searchInput.classList.toggle('active');
+
+        // If the input is active, and it has a value, try to find the chapter
+        if (isActive && searchInput.value) {
+            scrollToChapter(parseInt(searchInput.value));
+            searchInput.blur(); // Remove focus
+            searchInput.value = ''; // Clear the input
+            searchInput.classList.remove('active'); // Hide it again after search
+        } else if (isActive) {
+            searchInput.focus(); // Focus on the input when it appears
+        }
+    });
+
+    searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault(); // Prevent form submission (if it were a form)
+            scrollToChapter(parseInt(searchInput.value));
+            searchInput.blur();
+            searchInput.value = '';
+            searchInput.classList.remove('active');
+        }
+    });
+    
+    function scrollToChapter(chapterNum) {
+        if (chapterNum > 0 && chapterNum <= totalChapters) {
+            const targetLink = document.querySelector(`.episode-link[href="#chapter-${chapterNum}"]`);
+            if (targetLink) {
+                // Flash the button or scroll the view
+                targetLink.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                // Simple visual feedback: temporarily highlight the found chapter
+                const originalBg = targetLink.style.backgroundColor;
+                targetLink.style.backgroundColor = 'var(--accent-color)';
+                setTimeout(() => {
+                    targetLink.style.backgroundColor = originalBg;
+                    // For current chapter, reset to its designated color
+                    if(chapterNum === currentChapter) {
+                       targetLink.style.backgroundColor = ''; // Use CSS class
+                    }
+                }, 1000);
+            }
+        } else {
+            alert(`Chapter ${chapterNum} is out of range (1 - ${totalChapters})`);
+        }
+    }
+  </script>
+
+</body>
+</html>
