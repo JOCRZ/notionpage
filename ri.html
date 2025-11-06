@@ -157,7 +157,7 @@
     footer{margin-top:1rem;background:var(--card); padding:.8rem;border-radius:10px; text-align:center; box-shadow:0 3px 8px var(--shadow)}
     footer nav{display:flex; gap:1rem; justify-content:center; align-items:center}
     footer a{color:var(--text); text-decoration:none; display:flex; gap:.5rem; align-items:center; font-weight:600}
-    .playlist-link { color: #000000; text-decoration: none; padding: 5px; border: 1px solid #000000; border-radius: 3px; display: inline-block; } .playlist-link i { margin-right: 5px; } .playlist-link:hover { background-color: #185399; color: #FFFFFF; }
+
   </style>
 </head>
 <body class="dark">
@@ -192,7 +192,6 @@
     <div class="chapter-card">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:.75rem;">
         <strong>Chapters</strong>
-        <a href="https://www.youtube.com/playlist?list=PLGQiSf7MYlFlbtxMBV8vqIi5IgTwjuPeV" class="playlist-link"><i class="fas fa-list-ul"></i> Playlist</a>
         <span style="color:var(--muted); font-weight:600">Total: <span id="totalCount">0</span></span>
       </div>
       <div id="chapterGrid" class="chapter-grid"></div>
@@ -209,6 +208,7 @@
 </footer>
 
 <script>
+
 /********** Theme toggle **********/
 const body = document.body;
 const themeToggle = document.getElementById('themeToggle');
@@ -221,10 +221,12 @@ themeToggle.addEventListener('click', () => {
   themeToggle.textContent = body.classList.contains('dark') ? '☀️ Light Mode' : '🌙 Dark Mode';
 });
 
+
 /********** Manual Arcs + Chapters **********/
+
 const arcs = [
   {
-    name: "Arc 1 - Academy",
+    name: "Arc 1 - Academy", 
     chapters: [
 { num:  1 , link: " https://www.youtube.com/watch?v=rYIOHdssdmU "},
 { num:  2 , link: " https://www.youtube.com/watch?v=Lnm5ac3McaM "},
