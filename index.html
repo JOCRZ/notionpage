@@ -104,7 +104,7 @@
 
     .upload-text h1 {
       margin: 0.3rem 0;
-      font-size: clamp(1.8rem, 6vw, 2.4rem);
+      font-size: clamp(1.6rem, 5vw, 2.2rem);
       font-family: Georgia, serif;
       font-style: italic;
       line-height: 1.2;
@@ -133,10 +133,10 @@
     }
 
     .upload-image img {
-      width: 400px;
-      height: 600px;
+      width: 175px;
+      height: 242px;
       border-radius: 12px;
-      object-fit: contain; /* ✅ ensures full image fits without zoom/crop */
+      object-fit: contain;
       background-color: #ccc;
       box-shadow: 0 4px 10px var(--shadow-color);
     }
@@ -150,7 +150,7 @@
 
     .card-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
       gap: 1rem;
       justify-items: center;
     }
@@ -162,8 +162,7 @@
       overflow: hidden;
       box-shadow: 0 2px 6px var(--shadow-color);
       transition: transform 0.3s ease;
-      width: 100%;
-      max-width: 400px;
+      width: 175px;
     }
 
     .card:hover {
@@ -171,11 +170,10 @@
     }
 
     .card img {
-      width: 400px;
-      height: 600px;
-      max-width: 100%;
+      width: 175px;
+      height: 242px;
       border-radius: 10px;
-      object-fit: contain; /* ✅ no zoom, full image visible */
+      object-fit: contain;
       display: block;
       margin: 0 auto;
       background-color: #ccc;
@@ -191,107 +189,3 @@
     footer {
       background-color: var(--card-bg);
       padding: 1rem 0;
-      text-align: center;
-      box-shadow: 0 -2px 8px var(--shadow-color);
-    }
-
-    footer nav {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    footer a {
-      color: var(--text-color);
-      text-decoration: none;
-      font-weight: 600;
-      transition: opacity 0.3s;
-    }
-
-    footer a:hover {
-      opacity: 0.6;
-    }
-
-    @media (min-width: 600px) {
-      footer nav {
-        flex-direction: row;
-        justify-content: center;
-        gap: 1.5rem;
-      }
-
-      .upload-section {
-        flex-direction: row;
-        text-align: left;
-      }
-
-      .upload-text {
-        flex: 1;
-      }
-    }
-  </style>
-</head>
-<body>
-
-  <header>
-    <div class="logo">NOVELWAVE</div>
-    <button class="theme-toggle" id="themeToggle">🌙 Dark Mode</button>
-  </header>
-
-  <main>
-    <section class="upload-section">
-      <div class="upload-text">
-        <h3>CURRENTLY UPLOADING</h3>
-        <h1><em>REVEREND<br>INSANITY</em></h1>
-        <p>Status: Ongoing</p>
-        <a href="#">LISTEN NOW</a>
-      </div>
-      <div class="upload-image">
-        <img src="Data/RI.png" alt="Reverend Insanity">
-      </div>
-    </section>
-
-    <section class="card-section">
-      <div class="card-grid">
-        <div class="card">
-          <img src="Data/ORV.png" alt="Omniscient Reader’s Point of View">
-          <p>Omniscient Reader’s Point of View</p>
-        </div>
-        <div class="card">
-          <img src="Data/SS.png" alt="Shadow Slave">
-          <p>Shadow Slave</p>
-        </div>
-        <div class="card">
-          <img src="Data/LOTM.png" alt="The Lord of Mysteries">
-          <p>The Lord of Mysteries</p>
-        </div>
-        <div class="card">
-          <img src="Data/TBATE.png" alt="The Beginning After The End">
-          <p>The Beginning After The End</p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <nav>
-      <a href="#">YouTube</a>
-      <a href="#">Instagram</a>
-      <a href="#">Buy Me a Coffee</a>
-    </nav>
-  </footer>
-
-  <script>
-    const toggleBtn = document.getElementById("themeToggle");
-    const body = document.body;
-
-    toggleBtn.addEventListener("click", () => {
-      body.classList.toggle("dark");
-      toggleBtn.textContent = body.classList.contains("dark")
-        ? "☀️ Light Mode"
-        : "🌙 Dark Mode";
-    });
-  </script>
-
-</body>
-</html>
