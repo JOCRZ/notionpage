@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chapters Coming Soon | NovelWave</title>
+  <style>
+    :root {
+      --bg: #0f0f0f;
+      --text: #f5f5f5;
+      --accent: #ff7f50;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Poppins", sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      animation: fadeInUp 1.2s ease forwards;
+    }
+
+    p {
+      color: #ccc;
+      font-size: 1rem;
+      max-width: 400px;
+      animation: fadeInUp 1.5s ease forwards;
+    }
+
+    button {
+      margin-top: 1.5rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      color: white;
+      background: var(--accent);
+      transition: background 0.3s ease, transform 0.2s ease;
+      animation: fadeInUp 2s ease forwards;
+    }
+
+    button:hover {
+      background: #ff956f;
+      transform: scale(1.05);
+    }
+
+    footer {
+      position: absolute;
+      bottom: 1rem;
+      font-size: 0.85rem;
+      color: #999;
+      animation: fadeIn 2.5s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.7rem;
+      }
+      p {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Chapters Coming Soon</h1>
+    <p>We’re working hard to bring you the latest chapters. Stay tuned — they’ll be live very soon!</p>
+  </main>
+
+  <footer>© 2025 NovelWave</footer>
+
+</body>
+</html>
