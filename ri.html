@@ -40,7 +40,6 @@
       transition:background .25s, color .25s;
     }
 
-    /* Header */
     header{
       background:var(--card);
       padding:1rem 1.25rem;
@@ -63,9 +62,7 @@
       font-weight:600;
     }
 
-    /* Main layout */
     main{max-width:1200px; margin:1rem auto; width:95%; display:flex; gap:1rem; align-items:flex-start; flex-wrap:wrap;}
-    /* Left column: novel info + arcs list (on wide) */
     .left{
       flex: 0 0 280px;
       display:flex;
@@ -84,7 +81,6 @@
     .novel-card h1{margin:.1rem 0;font-family:Georgia,serif;font-style:italic;font-size:1.2rem}
     .novel-card p{margin:.4rem 0 0;color:var(--muted); font-style:italic}
 
-    /* Arc list (list view) */
     .arc-list{
       background:var(--card);
       border-radius:12px;
@@ -103,25 +99,15 @@
       text-align:left;
       font-weight:600;
     }
-    .arc-item:hover{opacity:.9}
     .arc-item.active{
       background:var(--accent-strong);
       color:#fff;
       border-color:var(--accent-strong);
     }
-    body.dark .arc-item{border-color:rgba(255,255,255,0.04)}
-    body.dark .arc-item:hover{opacity:.95}
 
-    /* Right column: chapter grid and controls */
     .right{flex:1; min-width:320px; display:flex;flex-direction:column; gap:1rem;}
-
-    .controls{
-      display:flex;
-      gap:.5rem;
-      align-items:center;
-      justify-content:flex-end;
-    }
-    .controls .find-row{display:flex; gap:.4rem; align-items:center}
+    .controls{display:flex; gap:.5rem; align-items:center; justify-content:flex-end;}
+    .find-row{display:flex; gap:.4rem; align-items:center}
     .search-input{
       width:110px;
       padding:.45rem .6rem;
@@ -140,7 +126,6 @@
       font-weight:700;
     }
 
-    /* Chapter grid (original/old view) */
     .chapter-card{
       background:var(--card);
       border-radius:12px;
@@ -162,222 +147,160 @@
       text-decoration:none;
       color:var(--text);
       font-weight:700;
-      transition:transform .12s, background .12s, border-color .12s;
+      transition:transform .12s;
       box-shadow:0 2px 6px rgba(0,0,0,0.06);
       font-size:0.9rem;
     }
-    .chapter-link:hover{transform:translateY(-4px)}
-    .chapter-link.current{ background:var(--accent); color:#fff; border-color:var(--accent); box-shadow:0 6px 12px rgba(0,0,0,0.12); }
-    .chapter-link.found{ outline:3px solid var(--accent-strong); box-shadow:0 8px 20px rgba(74,144,226,0.18); }
+    .chapter-link.current{background:var(--accent);color:#fff;border-color:var(--accent);}
+    .chapter-link.found{outline:3px solid var(--accent-strong);}
 
-    /* Footer */
     footer{margin-top:1rem;background:var(--card); padding:.8rem;border-radius:10px; text-align:center; box-shadow:0 3px 8px var(--shadow)}
     footer nav{display:flex; gap:1rem; justify-content:center; align-items:center}
     footer a{color:var(--text); text-decoration:none; display:flex; gap:.5rem; align-items:center; font-weight:600}
-
-    /* Responsive */
-    @media (max-width: 900px){
-      main{padding:1rem}
-      .left{flex:0 0 100%; order:1}
-      .right{order:2; width:100%}
-      .controls{justify-content:space-between}
-      .arc-list{order:0}
-    }
   </style>
 </head>
 <body class="dark">
 
-  <header>
-    <a class="logo" href="index.html">NOVELWAVE</a>
-    <button id="themeToggle" class="theme-toggle">☀️ Light Mode</button>
-  </header>
+<header>
+  <a class="logo" href="index.html">NOVELWAVE</a>
+  <button id="themeToggle" class="theme-toggle">☀️ Light Mode</button>
+</header>
 
-  <main>
-    <!-- left column: cover + arc list -->
-    <div class="left">
-      <div class="novel-card" aria-label="novel info">
-        <img src="Data/RI.png" alt="Reverend Insanity cover">
-        <h1>Reverend Insanity</h1>
-        <p>An epic tale of a cunning immortal reborn in a cruel world where strength rules. Follow Fang Yuan's schemes and survival.</p>
-      </div>
+<main>
+  <div class="left">
+    <div class="novel-card">
+      <img src="Data/RI.png" alt="Reverend Insanity cover">
+      <h1>Reverend Insanity</h1>
+      <p>An epic tale of a cunning immortal reborn in a cruel world where strength rules.</p>
+    </div>
 
-      <div class="arc-list" aria-label="arc list">
-        <h3>Arcs</h3>
-        <div class="arc-items">
-          <!-- Arc items will be filled by JS -->
-        </div>
+    <div class="arc-list">
+      <h3>Arcs</h3>
+      <div class="arc-items"></div>
+    </div>
+  </div>
+
+  <div class="right">
+    <div class="controls">
+      <div class="find-row">
+        <input id="searchInput" class="search-input" type="number" min="1" placeholder="Go to #">
+        <button id="findBtn" class="control-button">Find</button>
       </div>
     </div>
 
-    <!-- right column: controls + chapter grid -->
-    <div class="right">
-      <div class="controls">
-        <div class="find-row">
-          <input id="searchInput" class="search-input" type="number" min="1" placeholder="Go to #">
-          <button id="findBtn" class="control-button">Find</button>
-        </div>
+    <div class="chapter-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:.75rem;">
+        <strong>Chapters</strong>
+        <span style="color:var(--muted); font-weight:600">Total: <span id="totalCount">0</span></span>
       </div>
-
-      <div class="chapter-card">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:.75rem;">
-          <strong>Chapters</strong>
-          <span style="color:var(--muted); font-weight:600">Total: <span id="totalCount">0</span></span>
-        </div>
-
-        <div id="chapterGrid" class="chapter-grid" aria-label="chapter grid">
-          <!-- chapter links generated by JS -->
-        </div>
-      </div>
+      <div id="chapterGrid" class="chapter-grid"></div>
     </div>
-  </main>
+  </div>
+</main>
 
-  <footer>
-    <nav>
-      <a href="#" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
-      <a href="#" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
-      <a href="#" target="_blank"><i class="fas fa-mug-hot"></i> Buy Me a Coffee</a>
-    </nav>
-  </footer>
+<footer>
+  <nav>
+    <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
+    <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+    <a href="#"><i class="fas fa-mug-hot"></i> Buy Me a Coffee</a>
+  </nav>
+</footer>
 
-  <script>
-    /********** Theme toggle (persist) **********/
-    const body = document.body;
-    const themeToggle = document.getElementById('themeToggle');
-    const saved = localStorage.getItem('theme');
-    if(saved === 'light') body.classList.remove('dark');
-    themeToggle.textContent = body.classList.contains('dark') ? '☀️ Light Mode' : '🌙 Dark Mode';
-    themeToggle.addEventListener('click', () => {
-      body.classList.toggle('dark');
-      localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
-      themeToggle.textContent = body.classList.contains('dark') ? '☀️ Light Mode' : '🌙 Dark Mode';
+<script>
+/********** Theme toggle **********/
+const body = document.body;
+const themeToggle = document.getElementById('themeToggle');
+const saved = localStorage.getItem('theme');
+if(saved === 'light') body.classList.remove('dark');
+themeToggle.textContent = body.classList.contains('dark') ? '☀️ Light Mode' : '🌙 Dark Mode';
+themeToggle.addEventListener('click', () => {
+  body.classList.toggle('dark');
+  localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
+  themeToggle.textContent = body.classList.contains('dark') ? '☀️ Light Mode' : '🌙 Dark Mode';
+});
+
+/********** Manual Arcs + Chapters **********/
+const arcs = [
+  {
+    name: "Arc 1 - Awakening",
+    chapters: [
+      { num: 1, link: "chapters/ch1.html" },
+      { num: 2, link: "chapters/ch2.html" },
+      { num: 3, link: "chapters/ch3.html" },
+      { num: 4, link: "https://example.com/ch4" }
+    ]
+  },
+  {
+    name: "Arc 2 - Ascension",
+    chapters: [
+      { num: 5, link: "chapters/ch5.html" },
+      { num: 6, link: "chapters/ch6.html" },
+      { num: 7, link: "https://example.com/ch7" }
+    ]
+  }
+];
+
+let totalChapters = arcs.reduce((sum,a)=>sum+a.chapters.length,0);
+document.getElementById('totalCount').textContent = totalChapters;
+
+const chapterGrid = document.getElementById('chapterGrid');
+const arcContainer = document.querySelector('.arc-items');
+
+function renderChapters(chapters){
+  chapterGrid.innerHTML = '';
+  chapters.forEach(ch=>{
+    const a = document.createElement('a');
+    a.href = ch.link;
+    a.className = 'chapter-link';
+    a.textContent = ch.num;
+    a.id = `chapter-${ch.num}`;
+    chapterGrid.appendChild(a);
+  });
+}
+
+function renderArcs(){
+  arcContainer.innerHTML = '';
+  arcs.forEach((arc, idx)=>{
+    const btn = document.createElement('button');
+    btn.className = 'arc-item';
+    btn.textContent = arc.name;
+    if(idx===0) btn.classList.add('active');
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.arc-item').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      renderChapters(arc.chapters);
     });
+    arcContainer.appendChild(btn);
+  });
+  renderChapters(arcs[0].chapters);
+}
+renderArcs();
 
-    /********** Chapter & Arc data **********/
-    // You can change totalChapters to the real number (100 etc.)
-    const totalChapters = 100;
-    const currentChapter = 57; // if you want to mark a "current" one
-    document.getElementById('totalCount').textContent = totalChapters;
+/********** Find Functionality **********/
+const searchInput = document.getElementById('searchInput');
+const findBtn = document.getElementById('findBtn');
 
-    // define arcs as ranges (you can edit ranges)
-    const arcs = [
-      { id:1, name:'Arc 1', start:1, end:34 },
-      { id:2, name:'Arc 2', start:35, end:67 },
-      { id:3, name:'Arc 3', start:68, end:100 }
-    ];
-
-    /********** Generate chapter grid (old style) **********/
-    const chapterGrid = document.getElementById('chapterGrid');
-
-    function buildGrid(start=1, end=totalChapters){
-      chapterGrid.innerHTML = '';
-      for(let i=start;i<=end;i++){
-        const a = document.createElement('a');
-        a.href = `chapters/chapter-${i}.html`; // link to actual chapter page
-        a.className = 'chapter-link';
-        a.id = `chapter-${i}`;
-        a.textContent = String(i).padStart(1,'0'); // display number
-        if(i === currentChapter) a.classList.add('current');
-        // click handler: normal navigation (opens link). For single page scrolling you can preventDefault and handle.
-        chapterGrid.appendChild(a);
-      }
+findBtn.addEventListener('click', ()=>{
+  const val = parseInt(searchInput.value,10);
+  if(!Number.isInteger(val)){alert('Enter a chapter number');return;}
+  const ch = arcs.flatMap(a=>a.chapters).find(c=>c.num===val);
+  if(!ch){alert('Chapter not found');return;}
+  // find which arc contains it
+  const arcIndex = arcs.findIndex(a=>a.chapters.some(c=>c.num===val));
+  if(arcIndex>=0){
+    document.querySelectorAll('.arc-item').forEach((b,i)=>b.classList.toggle('active',i===arcIndex));
+    renderChapters(arcs[arcIndex].chapters);
+  }
+  setTimeout(()=>{
+    const el = document.getElementById(`chapter-${val}`);
+    if(el){
+      el.scrollIntoView({behavior:'smooth',block:'center'});
+      el.classList.add('found');
+      setTimeout(()=>el.classList.remove('found'),1200);
     }
-
-    // initial full grid
-    buildGrid(1, totalChapters);
-
-    /********** Arc list (list view) **********/
-    const arcContainer = document.querySelector('.arc-items');
-    function renderArcs(){
-      arcContainer.innerHTML = '';
-      arcs.forEach((arc, idx) => {
-        const btn = document.createElement('button');
-        btn.className = 'arc-item';
-        btn.textContent = `${arc.name} (${arc.start}-${arc.end})`;
-        btn.dataset.start = arc.start;
-        btn.dataset.end = arc.end;
-        btn.dataset.index = idx;
-        // default active first arc
-        if(idx === 0) btn.classList.add('active');
-        btn.addEventListener('click', () => {
-          // make active style
-          document.querySelectorAll('.arc-item').forEach(x => x.classList.remove('active'));
-          btn.classList.add('active');
-          // rebuild grid for arc range
-          buildGrid(arc.start, arc.end);
-          // scroll grid into view on small screens
-          document.querySelector('.chapter-card').scrollIntoView({behavior:'smooth', block:'start'});
-        });
-        arcContainer.appendChild(btn);
-      });
-    }
-    renderArcs();
-
-    /********** Find functionality (scroll + highlight) **********/
-    const searchInput = document.getElementById('searchInput');
-    const findBtn = document.getElementById('findBtn');
-
-    function flashAndScroll(chNum){
-      if(chNum < 1 || chNum > totalChapters){
-        alert(`Chapter ${chNum} is out of range (1 - ${totalChapters})`);
-        return;
-      }
-
-      // If the requested chapter is not currently in the grid range, find the arc it belongs to and switch to that arc
-      const arcForChapter = arcs.find(a => chNum >= a.start && chNum <= a.end);
-      if(arcForChapter){
-        // activate the arc button
-        document.querySelectorAll('.arc-item').forEach(b=>{
-          b.classList.toggle('active', parseInt(b.dataset.start) === arcForChapter.start);
-        });
-        // rebuild grid for that arc
-        buildGrid(arcForChapter.start, arcForChapter.end);
-      }
-
-      // small delay to ensure element exists after buildGrid
-      setTimeout(()=>{
-        const el = document.getElementById(`chapter-${chNum}`);
-        if(!el){
-          // not in DOM? (shouldn't happen) fallback to open link
-          window.open(`chapters/chapter-${chNum}.html`, '_blank');
-          return;
-        }
-        // scroll smoothly to element
-        el.scrollIntoView({behavior:'smooth', block:'center'});
-        // add found class
-        el.classList.add('found');
-        // remove highlight after 1.2s
-        setTimeout(()=> el.classList.remove('found'), 1200);
-      }, 80);
-    }
-
-    findBtn.addEventListener('click', ()=>{
-      const val = parseInt(searchInput.value,10);
-      if(Number.isInteger(val)) flashAndScroll(val);
-      else alert('Enter a chapter number');
-      searchInput.value = '';
-    });
-
-    // support Enter key
-    searchInput.addEventListener('keydown', e=>{
-      if(e.key === 'Enter'){
-        const val = parseInt(searchInput.value,10);
-        if(Number.isInteger(val)) flashAndScroll(val);
-        else alert('Enter a chapter number');
-        searchInput.value = '';
-      }
-    });
-
-    /********** Extra: clicking chapter opens link - preserve default navigation **********/
-    // (No changes needed. The anchor tags point to chapters/chapter-X.html)
-
-    /********** Accessibility: allow hash linking to open highlight if loaded via #chapter-X **********/
-    window.addEventListener('load', ()=>{
-      const hash = location.hash;
-      if(hash && hash.startsWith('#chapter-')){
-        const n = parseInt(hash.replace('#chapter-',''),10);
-        if(Number.isInteger(n)) flashAndScroll(n);
-      }
-    });
-  </script>
+  },80);
+  searchInput.value='';
+});
+</script>
 </body>
 </html>
