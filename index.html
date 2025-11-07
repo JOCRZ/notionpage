@@ -352,7 +352,7 @@
     const body = document.body;
     const logo = document.getElementById("logo");
 
-    // Ensure logo displays correctly on load
+    // ✅ Default: Light theme on load
     function applyTheme(isDark) {
       if (isDark) {
         body.classList.add("dark");
@@ -365,9 +365,8 @@
       }
     }
 
-    // Detect system theme preference
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    applyTheme(prefersDark);
+    // Start with light mode by default
+    applyTheme(false);
 
     // Handle toggle click
     toggleBtn.addEventListener("click", () => {
