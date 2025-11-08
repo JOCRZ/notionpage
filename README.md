@@ -2,9 +2,9 @@
 
 ## 📸 Preview
 <p align="center">
-  <img src="image1.png" alt="Tutorial Step 1" width="30%">
-  <img src="image2.png" alt="Tutorial Step 2" width="30%">
-  <img src="image3.png" alt="Tutorial Step 3" width="30%">
+  <img src="/Data/Readme/image1.png" alt="Tutorial Step 1" width="30%">
+  <img src="/Data/Readme/image2.png" alt="Tutorial Step 2" width="30%">
+  <img src="/Data/Readme/image3.png" alt="Tutorial Step 3" width="30%">
 </p>
 
 ---
