@@ -458,7 +458,7 @@
 
     async function loadComments() {
       try {
-        const response = await fetch('/Data/comments.txt');
+        const response = await fetch('Data/comments.txt');
         const text = await response.text();
         comments = text.split('\n').map(line => {
           let [commentor, ...commentParts] = line.split(':');
