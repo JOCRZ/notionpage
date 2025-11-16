@@ -380,6 +380,29 @@
       .upload-text {
         flex: 1;
       }
+
+      /* ------ Voice Sample ------ */
+      .voice-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;           /* space between name and play button */
+      margin: 10px 0;
+    }
+
+    .voice-label {
+      font-size: 16px;
+      font-weight: 600;
+      color: #222;
+    }
+
+    .play-sample {
+      cursor: pointer;
+      padding: 8px 14px;
+      background: #0078ff;
+      color: white;
+      border-radius: 6px;
+      font-size: 14px;
+    }
     }
 
   </style>
@@ -400,8 +423,21 @@
     <section class="upload-section">
       <div class="upload-text">
         <h3>CURRENTLY UPLOADING</h3>
-        <h1><em>REVEREND<br>INSANITY</em></h1>
+        <h1><em>Reverend<br>Insanity</em></h1>
         <p>Status: Ongoing</p>
+        
+        <audio id="sampleVoice" src="Data/RIBrian.mp3"></audio>
+
+        <div class="voice-container">
+         <!-- Voice Name First -->
+        <div class="voice-label">Brian (Male)</div>
+
+        <!-- Play Button -->
+        <div class="play-sample" onclick="playSample()">
+          ▶ Play Sample
+     </div>
+     </div>
+
         <a href="ri.html">Listen Now</a>
       </div>
       <div class="upload-image">
@@ -409,16 +445,32 @@
       </div>
     </section>
 
-    <section class="card-section">
-      <div class="card-grid">
-        <div class="card">
-          <img src="Data/ORV.png" alt="Omniscient Reader’s Point of View">
-          <p>Omniscient Reader’s Point of View</p>
-          <a href="orv.html">Coming Soon</a>
-        </div>
+    <section class="upload-section">
+      <div class="upload-text">
+       <!-- <h3>CURRENTLY UPLOADING</h3> -->
+        <h1><em>Omniscient Reader's<br> Viewpoint</em></h1>
+        <p>Status: On Hold</p>
+        <!--
+        <audio id="sampleVoice" src="Data/voice.mp3"></audio>
+
+        <div class="voice-container">
+         
+        <div class="voice-label">Emma (Female)</div>
+
+        
+        <div class="play-sample" onclick="playSample()">
+          ▶ Play Sample
+     </div>
+     </div> -->
+
+        <a href="orv.html">Comming Soon</a>
+      </div>
+      <div class="upload-image">
+        <img src="Data/ORV.png" alt="Omniscne reader's point of view">
       </div>
     </section>
 
+  
     <!-- COMMENT SECTION -->
     <section class="comment-section">
       <h3> @NovelWaveHz Comments</h3>
@@ -554,6 +606,14 @@
     prevButton.addEventListener('click', viewPreviousComment);
 
     loadComments();
+
+    // ---------- Sample Audio ----------
+    function playSample() {
+      const audio = document.getElementById("sampleVoice");
+      audio.currentTime = 0;  // reset play position
+      audio.play();
+    }
+
   </script>
 </body>
 </html>
