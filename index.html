@@ -353,12 +353,25 @@
       }
     }
 
-    /* Mobile Portrait Fix */
+    /* --- FIX 1: Mobile Portrait Spacing --- */
 @media (max-width: 480px) and (orientation: portrait) {
+  .voice-sample-box {
+    padding-bottom: 20px !important;
+  }
   .listen-now-btn {
-    margin-bottom: 18px !important;
+    margin-top: 14px !important;
   }
 }
+
+/* --- FIX 2: Prevent Wide Expansion on Desktop/Landscape --- */
+@media (min-width: 700px) {
+  .voice-sample-box {
+    max-width: 320px;       /* Keeps the box neat and compact */
+    width: 100%;
+  }
+}
+
+
   </style>
 </head>
 
