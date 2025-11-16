@@ -455,29 +455,50 @@
       localStorage.setItem("theme", isDark ? "dark" : "light");
     });
 
+        // ---------- COMMENT SECTION SCRIPT ----------
+        const commentorName = document.getElementById('commentor-name');
+    const commentText = document.getElementById('comment-text');
+    const prevButton = document.getElementById('prev-button');
+    const COMMENT_INTERVAL_MS = 5000;
+
+    let comments = [];
+    let history = [];
+    let intervalId;
+
     async function loadComments() {
       try {
         const response = await fetch('Data/comments.txt');
         const text = await response.text();
-
         comments = text.split('\n').map(line => {
           let [commentor, ...commentParts] = line.split(':');
           return {
-            commentor: commentor.trim(),
+            commentor: commentor ? commentor.trim() : '',
             commentText: commentParts.join(':').trim()
           };
         }).filter(c => c.commentor && c.commentText);
-
+        if (comments.length === 0) {
+          commentorName.textContent = "No comments found.";
+          commentText.textContent = "";
+          return;
+        }
         startCommentRotation();
       } catch (error) {
         commentorName.textContent = "Error loading comments.";
-        commentText.textContent = "";
+        commentText.textContent = "Make sure 'comments.txt' exists and is accessible.";
       }
     }
 
     function displayRandomComment() {
-      const randomIndex = Math.floor(Math.random() * comments.length);
+      if (comments.length === 0) return;
+      let randomIndex = Math.floor(Math.random() * comments.length);
+      let previousIndex = history.length > 0 ? history[history.length - 1] : -1;
+      while (randomIndex === previousIndex && comments.length > 1) {
+        randomIndex = Math.floor(Math.random() * comments.length);
+      }
+      history.push(randomIndex);
+      if (history.length > 10) history.shift();
       setComment(comments[randomIndex]);
+      updatePrevButtonState();
     }
 
     function setComment(comment) {
@@ -485,17 +506,47 @@
       commentText.textContent = comment.commentText;
     }
 
+    function viewPreviousComment() {
+      if (history.length <= 1) return;
+      history.pop();
+      const previousIndex = history.pop();
+      if (previousIndex !== undefined) {
+        history.push(previousIndex);
+        setComment(comments[previousIndex]);
+      }
+      updatePrevButtonState();
+      resetCommentRotation();
+    }
+
+    function updatePrevButtonState() {
+      prevButton.disabled = history.length <= 1;
+    }
+
     function startCommentRotation() {
       displayRandomComment();
-      intervalId = setInterval(displayRandomComment, 5000);
+      intervalId = setInterval(displayRandomComment, COMMENT_INTERVAL_MS);
     }
+
+    function resetCommentRotation() {
+      clearInterval(intervalId);
+      intervalId = setInterval(displayRandomComment, COMMENT_INTERVAL_MS);
+    }
+
+    prevButton.addEventListener('click', viewPreviousComment);
 
     loadComments();
 
+    // ---------------------------
+    // Audio play (unchanged)
+    // ---------------------------
     function playSample() {
       const audio = document.getElementById("sampleVoice");
+      if (!audio) return;
       audio.currentTime = 0;
-      audio.play();
+      audio.play().catch(err => {
+        // ignore autoplay policy errors; user action should allow playback
+        console.warn('Audio play failed:', err);
+      });
     }
   </script>
 
