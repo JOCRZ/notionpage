@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Reverend Insanity - Chapters | NovelWave</title>
 
-  <!-- Font Awesome for icons -->
+  <link rel="icon" type="image/png" href="Data/NWheadlogo.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
@@ -17,6 +17,9 @@
       --accent:#222;
       --shadow:rgba(0,0,0,0.08);
       --accent-strong:#4a90e2;
+      /* New Colors for Tags */
+      --tag-cc-bg:#cc4a3d;
+      --tag-rating-bg:#4CAF50;
     }
     body.dark{
       --bg:#1e1e1e;
@@ -26,6 +29,9 @@
       --accent:#ccc;
       --shadow:rgba(0,0,0,0.4);
       --accent-strong:#4a90e2;
+      /* New Colors for Tags - adjusted for dark mode, though they are fixed colors */
+      --tag-cc-bg:#cc4a3d;
+      --tag-rating-bg:#4CAF50;
     }
 
     *{box-sizing:border-box}
@@ -80,6 +86,66 @@
     .novel-card img{width:175px;height:242px;object-fit:contain;border-radius:8px;display:block;margin:0 auto 0.8rem; background:#ddd}
     .novel-card h1{margin:.1rem 0;font-family:Georgia,serif;font-style:italic;font-size:1.2rem}
     .novel-card p{margin:.4rem 0 0;color:var(--muted); font-style:italic}
+
+    /* --- NEW MEDIA DETAILS STYLES --- */
+    .media-info {
+        display: flex;
+        align-items: center;
+        justify-content: center; /* Center the tags below the description */
+        margin: 0.8rem 0;
+        flex-wrap: wrap; /* Allows wrapping on smaller screens */
+        gap: 0.5rem;
+    }
+
+    .tag {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5px 8px;
+        border-radius: 5px;
+        font-weight: bold;
+        font-size: 0.8em; /* Slightly smaller for the card */
+        height: 24px;
+        color: white; /* Tags have white text for contrast */
+    }
+
+    .tag.cc {
+        background-color: var(--tag-cc-bg);
+    }
+
+    .tag.rating {
+        background-color: var(--tag-rating-bg);
+    }
+
+    .tag img {
+    height: 18px;
+    width: 18px;
+    object-fit: contain;   /* prevents stretching */
+    margin-right: 2px;
+    margin-top: 10px;
+    display: inline-block; 
+    background: none !important; /* removes white circle look */
+    border-radius: 0 !important; /* ensures image stays sharp */
+    filter: none; /* since you use black logos */
+}
+
+
+    .media-type {
+        font-size: 0.9em;
+        font-weight: bold;
+        color: var(--accent-strong); /* Use an accent color for this */
+    }
+
+    .genres {
+        font-size: 0.9em;
+        color: var(--muted);
+    }
+
+    .genres span:not(:last-child)::after {
+        content: ",";
+        margin-right: 3px;
+    }
+    /* --- END NEW MEDIA DETAILS STYLES --- */
 
     .arc-list{
       background:var(--card);
@@ -173,6 +239,21 @@
       <img src="Data/RI.png" alt="Reverend Insanity cover">
       <h1>Reverend Insanity</h1>
       <p> Gu Zhen Ren </p>
+      
+      <div class="media-info">
+        <div class="tag cc">
+            <img src="Data/txtw.png" alt="novel"> 2334
+        </div>
+        <div class="tag rating">
+            <img src="Data/micw.png" alt="recorded"> 1189
+        </div>
+        <span class="media-type">WN</span>
+        <div class="genres">
+            <span>Xianxia</span>
+            <span>Dark fantasy</span>
+            <span>Isekai</span>
+        </div>
+      </div>
       <p>An epic tale of a cunning immortal reborn in a cruel world where strength rules.</p>
     </div>
 
