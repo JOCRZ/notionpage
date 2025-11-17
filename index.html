@@ -9,445 +9,281 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
-    :root {
-      --bg-color: #f5f5f5;
-      --card-bg: #ffffff;
-      --text-color: #222;
-      --accent-color: #666;
-      --button-bg: #222;
-      --button-text: #fff;
-      --shadow-color: rgba(0, 0, 0, 0.1);
+    /*
+      Cleaned theme variables and unified dark-mode handling.
+      body.dark toggles dark mode by overriding variables.
+    */
+
+    :root{
+      --bg: #f5f5f5;
+      --card: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --accent: #305caa;
+      --button-bg: #111827;
+      --button-text: #ffffff;
+      --play-blue: #0078ff;
+      --shadow: 0 4px 10px rgba(0,0,0,0.08);
       --comment-bg: #e9f0fb;
       --comment-border: #d1e2f6;
       --comment-highlight: #305caa;
+      --max-width: 900px;
     }
 
     body.dark {
-      --bg-color: #2e2e2e;
-      --card-bg: #3b3b3b;
-      --text-color: #fff;
-      --accent-color: #ccc;
-      --button-bg: #ccc;
-      --button-text: #222;
-      --shadow-color: rgba(0, 0, 0, 0.4);
+      --bg: #2e2e2e;
+      --card: #343434;
+      --text: #eef2f6;
+      --muted: #bfc6cd;
+      --accent: #99b7ff;
+      --button-bg: #d1d5db;
+      --button-text: #111827;
+      --play-blue: #1a73e8;
+      --shadow: 0 6px 18px rgba(0,0,0,0.45);
       --comment-bg: #4b4b4b;
       --comment-border: #666;
       --comment-highlight: #99b7ff;
     }
 
-    body {
-      margin: 0;
-      font-family: "Inter", Arial, sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      transition: background-color 0.4s ease, color 0.4s ease;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.8rem 1.2rem;
-      background-color: var(--card-bg);
-      box-shadow: 0 2px 10px var(--shadow-color);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      transition: background-color 0.4s ease;
-    }
-
-    .logo-container {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .logo-container img {
-      height: 58px;
-      width: auto;
-      transition: transform 0.3s ease;
-    }
-
-    .logo-container:hover img {
-      transform: scale(1.05);
-    }
-
-    .logo-text {
-      font-weight: 700;
-      font-size: clamp(1.3rem, 2.2vw, 1.8rem);
-      letter-spacing: 2px;
-    }
-
-    .theme-toggle {
-      background: none;
-      border: 2px solid var(--accent-color);
-      color: var(--text-color);
-      border-radius: 50%;
-      width: 38px;
-      height: 38px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .theme-toggle:hover {
-      background-color: var(--accent-color);
-      color: var(--bg-color);
-    }
-
-    main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      padding: 1rem;
-      max-width: 900px;
-      margin: 0 auto;
-      animation: fadeIn 0.5s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .upload-section {
-      background-color: var(--card-bg);
-      border-radius: 16px;
-      padding: 1.5rem;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 1.5rem;
-      box-shadow: 0 4px 10px var(--shadow-color);
-      text-align: center;
-      transition: background-color 0.3s ease;
-    }
-
-    .upload-text h3 {
-      margin: 0;
-      font-size: 0.9rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--accent-color);
-    }
-
-    .upload-text h1 {
-      margin: 0.3rem 0;
-      font-size: clamp(1.6rem, 5vw, 2.2rem);
-      font-family: Georgia, serif;
-      font-style: italic;
-      line-height: 1.2;
-    }
-
-    .upload-text p {
-      margin: 0.3rem 0 1rem;
-      color: var(--accent-color);
-      font-style: italic;
-    }
-
-    .upload-text a {
-      background-color: var(--button-bg);
-      color: var(--button-text);
-      padding: 0.6rem 1.4rem;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      display: inline-block;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-    }
-
-    .upload-text a:hover {
-      transform: scale(1.05);
-      opacity: 0.9;
-    }
-
-    .upload-image img {
-      width: 175px;
-      height: 242px;
-      border-radius: 12px;
-      object-fit: contain;
-      background-color: #ccc;
-      box-shadow: 0 4px 10px var(--shadow-color);
-    }
-
-    /* UPDATED SPACING HERE */
-    .voice-container {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      background: #ffffff;
-      padding: 12px 14px;
-      border-radius: 10px;
-      margin-top: 10px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-
-      gap: 14px;   /* ⭐ ADDED CLEAN SPACING */
-    }
-
-    .voice-label {
-      font-size: 16px;
-      font-weight: 600;
-    }
-
-    .play-sample {
-      background: #0078ff;
-      color: white;
-      padding: 8px 14px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 14px;
-      white-space: nowrap;
-    }
-
-    @media (max-width: 600px) {
-      .voice-container {
-        padding: 10px;
-        gap: 12px;
-      }
-
-      .voice-label {
-        font-size: 15px;
-      }
-
-      .play-sample {
-        padding: 7px 12px;
-        font-size: 13px;
-      }
-    }
-
-    .comment-section {
-      background-color: var(--card-bg);
-      border-radius: 16px;
-      padding: 2rem 1.5rem;
-      box-shadow: 0 4px 10px var(--shadow-color);
-      margin-top: 2rem;
-      text-align: center;
-    }
-
-    .comment-section h2 {
-      color: var(--text-color);
-      margin-bottom: 1.5rem;
-      font-size: 1.2rem;
-    }
-
-    #comment-container {
-      width: 100%;
-      max-width: 600px;
-      margin: 0 auto 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    #comment-card {
-      width: 100%;
-      padding: 18px 24px;
-      border-radius: 10px;
-      background-color: var(--comment-bg);
-      border: 1.5px solid var(--comment-border);
-      box-shadow: 0 2px 8px var(--shadow-color);
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      text-align: left;
-    }
-
-    #commentor-name {
-      font-weight: bold;
-      font-size: 1.1em;
-      color: var(--comment-highlight);
-      margin-bottom: 8px;
-    }
-
-    #comment-text {
-      font-size: 1.04em;
-      color: var(--text-color);
-      line-height: 1.4;
-    }
-
-    .comment-section button {
-      padding: 10px 15px;
-      font-size: 1em;
-      cursor: pointer;
-      background-color: var(--button-bg);
-      color: var(--button-text);
-      border: none;
-      border-radius: 5px;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-    }
-
-    .comment-section button:hover {
-      transform: scale(1.05);
-      opacity: 0.9;
-    }
-
-    .comment-section button:disabled {
-      background-color: #999;
-      cursor: not-allowed;
-    }
-
-    footer {
-      background-color: var(--card-bg);
-      padding: 1rem 0;
-      text-align: center;
-      box-shadow: 0 -2px 8px var(--shadow-color);
-    }
-
-    footer nav {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    footer a {
-      color: var(--text-color);
-      text-decoration: none;
-      font-weight: 600;
-      transition: opacity 0.3s;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    footer a:hover {
-      opacity: 0.6;
-    }
-
-    .ad-section {
-      width: 100%;
-      max-width: 300px;
-      margin: 20px auto;
-      text-align: center;
-    }
-
-    .ad-section img {
-      width: 100%;
-      border-radius: 10px;
-    }
-
-    @media (min-width: 600px) {
-      footer nav {
-        flex-direction: row;
-        justify-content: center;
-        gap: 1.5rem;
-      }
-
-      .upload-section {
-        flex-direction: row;
-        text-align: left;
-      }
-
-      .upload-text {
-        flex: 1;
-      }
-    }
-
-    /* --- FIX 1: Mobile Portrait Spacing --- */
-@media (max-width: 480px) and (orientation: portrait) {
-  .voice-sample-box {
-    padding-bottom: 20px !important;
-  }
-  .listen-now-btn {
-    margin-top: 14px !important;
-  }
-}
-
-/* --- FIX 2: Prevent Wide Expansion on Desktop/Landscape --- */
-@media (min-width: 700px) {
-  .voice-sample-box {
-    max-width: 320px;       /* Keeps the box neat and compact */
-    width: 100%;
-  }
-}
-
-/* --- Referral thanking --- */
-:root{
-      --bg:#f9f9fb;
-      --card:#ffffff;
-      --muted:#6b7280;
-      --accent:#111827;
-      --max-width:900px;
-    }
-    *{box-sizing:border-box}
+    /* Base layout */
+    *{ box-sizing: border-box; }
+    html,body{ height:100%; }
     body{
       margin:0;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;
-      background:var(--bg);
-      color:var(--accent);
+      font-family: "Inter", Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      transition: background-color .3s ease, color .3s ease;
+      display:flex;
+      flex-direction: column;
+      min-height:100vh;
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
-      padding:32px 16px;
+    }
+
+    header{
       display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:0.8rem 1.2rem;
+      background-color: var(--card);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top:0;
+      z-index:100;
+      transition: background-color .3s ease, box-shadow .3s ease;
+    }
+
+    .logo-container{ display:flex; align-items:center; gap:.6rem; }
+    .logo-container img{ height:58px; width:auto; transition:transform .25s ease; }
+    .logo-container:hover img{ transform:scale(1.03); }
+    .logo-text{ font-weight:700; font-size:clamp(1.3rem,2.2vw,1.8rem); letter-spacing:2px; color:var(--text); }
+
+    .theme-toggle{
+      background:none;
+      border:2px solid var(--muted);
+      color:var(--text);
+      border-radius:50%;
+      width:38px;
+      height:38px;
+      display:flex;
+      align-items:center;
       justify-content:center;
+      font-size:1.1rem;
+      cursor:pointer;
+      transition: all .25s ease;
     }
-    .container{
-      width:100%;
-      max-width:var(--max-width);
-    }
-    .card{
-      background:var(--card);
-      border-radius:12px;
-      padding:28px;
-      box-shadow:0 6px 18px rgba(17,24,39,0.06);
-    }
-    h1{
-      margin:0 0 12px 0;
-      font-size:28px;
-      line-height:1.15;
-    }
-    p.lead{
-      margin:0 0 20px 0;
-      color:var(--muted);
-      font-size:15px;
-    }
-    .stats{
+    .theme-toggle:hover{ background-color:var(--muted); color:var(--bg); }
+
+    main{
+      flex:1;
       display:flex;
-      gap:14px;
+      flex-direction:column;
+      gap:1.5rem;
+      padding:1rem;
+      max-width:var(--max-width);
+      margin:1rem auto;
+      animation: fadeIn .4s ease;
+      width:calc(100% - 2rem);
+    }
+    @keyframes fadeIn{ from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none} }
+
+    /* Upload / card */
+    .upload-section{
+      background-color: var(--card);
+      border-radius:16px;
+      padding:1.5rem;
+      display:flex;
       flex-wrap:wrap;
-      margin-bottom:22px;
+      justify-content:center;
+      align-items:center;
+      gap:1.5rem;
+      box-shadow: var(--shadow);
+      text-align:center;
+      transition: background-color .3s ease, box-shadow .3s ease;
     }
-    .stat{
-      background:#f3f4f6;
-      padding:14px 16px;
+
+    .upload-text h3{
+      margin:0;
+      font-size:.9rem;
+      letter-spacing:1px;
+      text-transform:uppercase;
+      color:var(--muted);
+    }
+    .upload-text h1{
+      margin:.3rem 0;
+      font-size:clamp(1.6rem,5vw,2.2rem);
+      font-family: Georgia, serif;
+      font-style: italic;
+      line-height:1.15;
+      color:var(--text);
+    }
+    .upload-text p{ margin:.3rem 0 1rem; color:var(--muted); font-style:italic; }
+
+    .upload-text a{
+      background-color: var(--button-bg);
+      color: var(--button-text);
+      padding: .56rem 1.2rem;
       border-radius:8px;
-      min-width:160px;
-      flex:1 1 160px;
-    }
-    .stat .label{
-      display:block;
-      font-size:13px;
-      color:var(--muted);
-      margin-bottom:6px;
-    }
-    .stat .value{
+      text-decoration:none;
       font-weight:600;
-      font-size:18px;
-      color:var(--accent);
+      display:inline-block;
+      transition: transform .2s ease, opacity .2s ease;
     }
-    .message{
-      margin-top:8px;
-      color:var(--muted);
-      line-height:1.6;
-      font-size:15px;
-    }
-    @media (max-width:520px){
-      h1{font-size:22px}
-      .stat{min-width:140px}
+    .upload-text a:hover{ transform:scale(1.03); opacity:.94; }
+
+    .upload-image img{
+      width:175px;
+      height:242px;
+      border-radius:12px;
+      object-fit:cover;
+      background-color: #ccc;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
     }
 
-/* --- End of Referral thanking --- */
+    /* Voice container */
+    .voice-container{
+      width:100%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      background: var(--card);              /* match card in both modes */
+      padding: 12px 14px;
+      border-radius:10px;
+      margin-top:10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+      gap:14px;
+      border: 1px solid rgba(0,0,0,0.04);
+    }
 
+    /* ensure contrast in dark mode */
+    body.dark .voice-container{
+      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .voice-label{ font-size:16px; font-weight:600; color:var(--text); }
+    .play-sample{
+      background: var(--play-blue);
+      color: #fff;
+      padding:8px 14px;
+      border-radius:6px;
+      cursor:pointer;
+      font-size:14px;
+      white-space:nowrap;
+      border:none;
+    }
+
+    /* Comment section */
+    .comment-section{
+      background-color: var(--card);
+      border-radius:16px;
+      padding:2rem 1.5rem;
+      box-shadow: var(--shadow);
+      margin-top:2rem;
+      text-align:center;
+      transition: background-color .3s ease, box-shadow .3s ease;
+    }
+    .comment-section h3{ color:var(--text); margin-bottom:1rem; }
+    #comment-container{ width:100%; max-width:600px; margin:0 auto 20px; display:flex; align-items:center; justify-content:center; }
+    #comment-card{
+      width:100%;
+      padding:18px 24px;
+      border-radius:10px;
+      background-color: var(--comment-bg);
+      border:1.5px solid var(--comment-border);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+      text-align:left;
+    }
+    #commentor-name{ font-weight:bold; font-size:1.05em; color: var(--comment-highlight); margin-bottom:8px; }
+    #comment-text{ font-size:1.02em; color:var(--text); line-height:1.4; }
+
+    .comment-section button{
+      padding: 10px 15px;
+      font-size:1em;
+      cursor:pointer;
+      background-color: var(--button-bg);
+      color: var(--button-text);
+      border:none;
+      border-radius:5px;
+      transition: transform .2s ease, opacity .2s ease;
+    }
+    .comment-section button:hover{ transform:scale(1.03); opacity:.95; }
+    .comment-section button:disabled{ background-color:#999; cursor:not-allowed; }
+
+    /* Ad section */
+    .ad-section{ width:100%; max-width:300px; margin:20px auto; text-align:center; }
+    .ad-section img{ width:100%; border-radius:10px; display:block; }
+
+    /* Footer / referral card (now uses the same theme variables) */
+    .thank-card{
+      background: var(--card);
+      padding: 1.6rem;
+      border-radius:12px;
+      box-shadow: var(--shadow);
+      width:100%;
+      max-width: var(--max-width);
+      margin: 0 auto 2rem;
+      color: var(--text);
+    }
+    .thank-card h1{ margin:0 0 12px 0; font-size:22px; line-height:1.15; }
+    .thank-card p.lead{ margin:0 0 18px 0; color:var(--muted); font-size:15px; }
+    .stats{ display:flex; gap:14px; flex-wrap:wrap; margin-bottom:12px; }
+    .stat{ background: rgba(0,0,0,0.03); padding:12px 14px; border-radius:8px; min-width:140px; flex:1 1 140px; }
+    body.dark .stat{ background: rgba(255,255,255,0.02); }
+    .stat .label{ display:block; font-size:13px; color:var(--muted); margin-bottom:6px; }
+    .stat .value{ font-weight:600; font-size:18px; color:var(--text); }
+
+    /* responsive adjustments */
+    @media (min-width:600px){
+      footer nav{ flex-direction:row; justify-content:center; gap:1.5rem; }
+      .upload-section{ flex-direction:row; text-align:left; }
+      .upload-text{ flex:1; }
+    }
+
+    @media (max-width:600px){
+      .upload-image img{ width:150px; height:210px; }
+      .logo-container img{ height:48px; }
+    }
+
+    /* small utility fixes from your previous rules kept */
+    @media (max-width:480px) and (orientation:portrait){
+      .voice-sample-box{ padding-bottom:20px !important; }
+      .listen-now-btn{ margin-top:14px !important; }
+    }
+    @media (min-width:700px){
+      .voice-sample-box{ max-width:320px; width:100%; }
+    }
+
+  /* footer  */
+  footer{margin-top:1rem;background:var(--card); padding:.8rem;border-radius:10px; text-align:center; box-shadow:0 3px 8px var(--shadow)}
+    footer nav{display:flex; gap:1rem; justify-content:center; align-items:center}
+    footer a{color:var(--text); text-decoration:none; display:flex; gap:.5rem; align-items:center; font-weight:600}
+
+ /* footer  */
   </style>
 </head>
 
@@ -458,48 +294,49 @@
       <img id="logo" src="Data/nwb.svg" alt="NovelWave Logo">
       <span class="logo-text">NovelWaveHz</span>
     </div>
-    <button class="theme-toggle" id="themeToggle">🌙</button>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
   </header>
 
   <main>
 
-    <section class="upload-section">
+    <section class="upload-section" aria-labelledby="ri-title">
       <div class="upload-text">
         <h3>CURRENTLY UPLOADING</h3>
-        <h1><em>Reverend<br>Insanity</em></h1>
-        <p>Status: Ongoing</p>
+        <h1 id="ri-title"><em>Reverend<br>Insanity</em></h1>
+        <p class="muted">Status: Ongoing</p>
 
-        <a href="ri.html">Listen Now</a>
+        <a class="listen-now-btn" href="ri.html">Listen Now</a>
       </div>
 
-      <div class="upload-image">
-        <img src="Data/RI.png" alt="Reverend Insanity">
+      <div class="upload-image" aria-hidden="true">
+        <img src="Data/RI.png" alt="Reverend Insanity cover">
       </div>
 
       <audio id="sampleVoice" src="Data/RIBrian.mp3"></audio>
-      <div class="voice-container">
+
+      <div class="voice-container" role="region" aria-label="Voice sample">
         <div class="voice-label">Brian (Male)</div>
-        <div class="play-sample" onclick="playSample()">▶ Play Sample</div>
+        <button class="play-sample" onclick="playSample()" aria-label="Play sample">▶ Play Sample</button>
       </div>
     </section>
 
-    <section class="upload-section">
+    <section class="upload-section" aria-labelledby="orv-title">
       <div class="upload-text">
-        <h1><em>Omniscient Reader's<br>Viewpoint</em></h1>
-        <p>Status: On Hold</p>
+        <h1 id="orv-title"><em>Omniscient Reader's<br>Viewpoint</em></h1>
+        <p class="muted">Status: On Hold</p>
         <a href="orv.html">Coming Soon</a>
       </div>
 
-      <div class="upload-image">
-        <img src="Data/ORV.png" alt="Omniscient Reader's Viewpoint">
+      <div class="upload-image" aria-hidden="true">
+        <img src="Data/ORV.png" alt="Omniscient Reader's Viewpoint cover">
       </div>
     </section>
 
-    <section class="comment-section">
-      <h3>@NovelWaveHz Comments</h3>
+    <section class="comment-section" aria-labelledby="comments-heading">
+      <h3 id="comments-heading">@NovelWaveHz Comments</h3>
 
       <div id="comment-container">
-        <div id="comment-card">
+        <div id="comment-card" role="article">
           <div id="commentor-name">Loading...</div>
           <div id="comment-text"></div>
         </div>
@@ -511,12 +348,12 @@
   </main>
 
   <div class="ad-section">
-    <a href="https://elevenreader.io/referral/a4KMjhx6" target="_blank">
+    <a href="https://elevenreader.io/referral/a4KMjhx6" target="_blank" rel="noopener noreferrer">
       <img src="Data/ad.jpg" alt="Advertisement">
     </a>
   </div>
 
-  <section class="card" aria-labelledby="thank-heading">
+  <section class="thank-card" aria-labelledby="thank-heading">
     <h1 id="thank-heading">Thank you for your support</h1>
     <p class="lead">I want to express my sincere gratitude to everyone who used referral link.</p>
 
@@ -537,17 +374,18 @@
       </div>
     </div>
 
-
+  </section>
 
   <footer>
     <nav>
-      <a href="https://www.youtube.com/@NovelWaveHz/" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
-      <a href="https://www.instagram.com/novelwavehz" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
-      <a href="https://buymeacoffee.com/Jo3416" target="_blank"><i class="fas fa-mug-hot"></i> Buy Me a Coffee</a>
+      <a href="https://www.youtube.com/@NovelWaveHz/" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i> YouTube</a>
+      <a href="https://www.instagram.com/novelwavehz" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i> Instagram</a>
+      <a href="https://buymeacoffee.com/Jo3416" target="_blank" rel="noopener noreferrer"><i class="fas fa-mug-hot"></i> Buy Me a Coffee</a>
     </nav>
   </footer>
 
   <script>
+    // Theme toggle (keeps your logo swap)
     const toggleBtn = document.getElementById("themeToggle");
     const body = document.body;
     const logo = document.getElementById("logo");
@@ -556,6 +394,7 @@
       if (isDark) {
         body.classList.add("dark");
         toggleBtn.textContent = "☀️";
+        // ensure this file exists; fallback to same logo if not
         logo.src = "Data/nww.svg";
       } else {
         body.classList.remove("dark");
@@ -573,8 +412,8 @@
       localStorage.setItem("theme", isDark ? "dark" : "light");
     });
 
-        // ---------- COMMENT SECTION SCRIPT ----------
-        const commentorName = document.getElementById('commentor-name');
+    // ---------- COMMENT SECTION SCRIPT ----------
+    const commentorName = document.getElementById('commentor-name');
     const commentText = document.getElementById('comment-text');
     const prevButton = document.getElementById('prev-button');
     const COMMENT_INTERVAL_MS = 5000;
@@ -655,14 +494,13 @@
     loadComments();
 
     // ---------------------------
-    // Audio play (unchanged)
+    // Audio play
     // ---------------------------
     function playSample() {
       const audio = document.getElementById("sampleVoice");
       if (!audio) return;
       audio.currentTime = 0;
       audio.play().catch(err => {
-        // ignore autoplay policy errors; user action should allow playback
         console.warn('Audio play failed:', err);
       });
     }
