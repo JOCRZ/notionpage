@@ -371,6 +371,82 @@
   }
 }
 
+/* --- Referral thanking --- */
+:root{
+      --bg:#f9f9fb;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --accent:#111827;
+      --max-width:900px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;
+      background:var(--bg);
+      color:var(--accent);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:32px 16px;
+      display:flex;
+      justify-content:center;
+    }
+    .container{
+      width:100%;
+      max-width:var(--max-width);
+    }
+    .card{
+      background:var(--card);
+      border-radius:12px;
+      padding:28px;
+      box-shadow:0 6px 18px rgba(17,24,39,0.06);
+    }
+    h1{
+      margin:0 0 12px 0;
+      font-size:28px;
+      line-height:1.15;
+    }
+    p.lead{
+      margin:0 0 20px 0;
+      color:var(--muted);
+      font-size:15px;
+    }
+    .stats{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-bottom:22px;
+    }
+    .stat{
+      background:#f3f4f6;
+      padding:14px 16px;
+      border-radius:8px;
+      min-width:160px;
+      flex:1 1 160px;
+    }
+    .stat .label{
+      display:block;
+      font-size:13px;
+      color:var(--muted);
+      margin-bottom:6px;
+    }
+    .stat .value{
+      font-weight:600;
+      font-size:18px;
+      color:var(--accent);
+    }
+    .message{
+      margin-top:8px;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:15px;
+    }
+    @media (max-width:520px){
+      h1{font-size:22px}
+      .stat{min-width:140px}
+    }
+
+/* --- End of Referral thanking --- */
 
   </style>
 </head>
@@ -439,6 +515,32 @@
       <img src="Data/ad.jpg" alt="Advertisement">
     </a>
   </div>
+
+  <section class="card" aria-labelledby="thank-heading">
+    <h1 id="thank-heading">Thank you for your support</h1>
+    <p class="lead">I want to express my sincere gratitude to everyone who used referral link.</p>
+
+    <div class="stats" role="list">
+      <div class="stat" role="listitem">
+        <span class="label">Total Referrals</span>
+        <span class="value">6</span>
+      </div>
+
+      <div class="stat" role="listitem">
+        <span class="label">Listening Hours Earned</span>
+        <span class="value">30</span>
+      </div>
+
+      <div class="stat" role="listitem">
+        <span class="label">Approx Chapters Generated</span>
+        <span class="value">138</span>
+      </div>
+    </div>
+
+    <div class="message">
+      <p>Every single referral matters. Each one helps to get more hours, which makes it possible to keep creating more content.</p>
+    </div>
+
 
   <footer>
     <nav>
