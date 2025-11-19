@@ -195,14 +195,18 @@ header a i.fab.fa-youtube {
       letter-spacing:1px;
       text-transform:uppercase;
       color:var(--muted);
+      text-wrap:wrap;
+      overflow:hidden;
     }
     .upload-text h4{
       margin:.1rem 0;
-      font-size:clamp(1.6rem,5vw,2.2rem);
+      font-size:clamp(1.3rem,5vw,2.2rem);
       font-family: Georgia, serif;
       font-style: italic;
       line-height:1.15;
       color:var(--text);
+      text-wrap:wrap;
+      overflow:hidden;
     }
     .upload-text p{ margin:.3rem 0 1rem; color:var(--muted); font-style:italic; }
 
@@ -215,6 +219,8 @@ header a i.fab.fa-youtube {
       font-weight:600;
       display:inline-block;
       transition: transform .2s ease, opacity .2s ease;
+      text-wrap:wrap;
+      overflow:hidden;
     }
     .upload-text a:hover{ transform:scale(1.03); opacity:.94; }
 
@@ -457,11 +463,11 @@ margin-right: 6px;
         <div class="upload-image" aria-hidden="true">
           <img src="Data/RI.png" alt="Reverend Insanity cover">
         </div>
-        <audio id="sampleVoice" src="Data/RIBrian.mp3"></audio>
+       <!--  <audio id="sampleVoice" src="Data/RIBrian.mp3"></audio>
         <div class="voice-container" role="region" aria-label="Voice sample">
           <div class="voice-label">Brian (Male)</div>
           <button class="play-sample" onclick="playSample()" aria-label="Play sample">▶ Play Sample</button>
-        </div>
+        </div>-->
       </section>
 
       <section class="upload-section" aria-labelledby="orv-title">
@@ -474,7 +480,7 @@ margin-right: 6px;
         <div class="upload-image" aria-hidden="true">
           <img src="Data/ORV.png" alt="Omniscient Reader's Viewpoint cover">
         </div>
-        <!-- <audio id="sampleVoice" src=""></audio>
+       <!--  <audio id="sampleVoice" src=""></audio>
         <div class="voice-container" role="region" aria-label="Voice sample">
           <div class="voice-label">(Male)</div>
           <button class="play-sample" onclick="playSample()" aria-label="Play sample">▶ Play Sample</button>
