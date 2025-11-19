@@ -61,19 +61,48 @@
       -moz-osx-font-smoothing:grayscale;
     }
 
-    header{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:0.8rem 1.2rem;
-      background-color: var(--card);
-      box-shadow: var(--shadow);
-      position: sticky;
-      top:0;
-      z-index:100;
-      transition: background-color .3s ease, box-shadow .3s ease;
-    }
+    /* Header styling */
+header {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem 1.2rem;
+  background-color: var(--card);
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
 
+/* Left logo container */
+header .logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* space between image and text */
+}
+
+/* Right side container */
+header .right-items {
+  display: flex;
+  align-items: center;
+  gap: 1rem;       /* spacing between YouTube and toggle */
+  margin-left: auto; /* push to the far right */
+}
+
+/* YouTube icon styling */
+header .youtube-link i.fab.fa-youtube {
+  font-size: 2rem;  /* bigger icon */
+  color: #FF0000;   /* YouTube red */
+}
+
+header .youtube-link i.fab.fa-youtube:hover {
+  color: #cc0000;   /* slightly darker red on hover */
+}
+
+/* Theme toggle button spacing */
+header .theme-toggle {
+  font-size: 1.2rem;
+}
     .logo-container{ display:flex; align-items:center; gap:.6rem; }
     .logo-container img{ height:58px; width:auto; transition:transform .25s ease; }
     .logo-container:hover img{ transform:scale(1.03); }
@@ -403,13 +432,21 @@ margin-right: 6px;
 <body>
 
   <header>
+    <!-- Left side: Logo -->
     <div class="logo-container">
       <img id="logo" src="Data/nwb.svg" alt="NovelWave Logo">
       <span class="logo-text">NovelWaveHz</span>
     </div>
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+  
+    <!-- Right side: YouTube icon + theme toggle -->
+    <div class="right-items">
+      <a href="https://www.youtube.com/@NovelWaveHz/" target="_blank" class="youtube-link">
+        <i class="fab fa-youtube"></i>
+      </a>
+      <button class="theme-toggle">🌙</button>
+    </div>
   </header>
-
+  
   <main>
 
       <!-- Horizontal scroll wrapper for upload cards -->
@@ -437,16 +474,16 @@ margin-right: 6px;
 
       <section class="upload-section" aria-labelledby="orv-title">
         <div class="upload-text">
-          <h4 id="orv-title"><em>Omniscient <br>Readers Viewpoint</em></h4>
+          <h4 id="orv-title"><em>Omniscient <br>Readers<br>Viewpoint</em></h4>
           <p class="muted">Status: On Hold</p>
           <a class="listen-now-btn" href="orv.html">Comming Soon</a>
         </div>
         <div class="upload-image" aria-hidden="true">
           <img src="Data/ORV.png" alt="Omniscient Reader's Viewpoint cover">
         </div>
-        <audio id="sampleVoice" src="Data/RIBrian.mp3"></audio>
+        <audio id="sampleVoice" src="Data/.mp3"></audio>
         <div class="voice-container" role="region" aria-label="Voice sample">
-          <div class="voice-label">Brian (Male)</div>
+          <div class="voice-label">(Male)</div>
           <button class="play-sample" onclick="playSample()" aria-label="Play sample">▶ Play Sample</button>
         </div> 
       </section>
@@ -523,9 +560,9 @@ margin-right: 6px;
 
   <footer>
     <nav>
-      <a href="https://www.youtube.com/@NovelWaveHz/" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i> YouTube</a>
-      <a href="https://www.instagram.com/novelwavehz" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i> Instagram</a>
-      <a href="https://buymeacoffee.com/Jo3416" target="_blank" rel="noopener noreferrer"><i class="fas fa-mug-hot"></i> Buy Me a Coffee</a>
+      <a href="https://www.youtube.com/@NovelWaveHz/" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i> </a>
+      <a href="https://www.instagram.com/novelwavehz" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i> </a>
+      <a href="https://buymeacoffee.com/Jo3416" target="_blank" rel="noopener noreferrer"><i class="fas fa-mug-hot"></i> </a>
     </nav>
   </footer>
 
