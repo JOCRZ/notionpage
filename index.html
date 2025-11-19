@@ -61,48 +61,33 @@
       -moz-osx-font-smoothing:grayscale;
     }
 
-    /* Header styling */
-header {
-  display: flex;
-  align-items: center;
-  padding: 0.8rem 1.2rem;
-  background-color: var(--card);
-  box-shadow: var(--shadow);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:0.8rem 1.2rem;
+      background-color: var(--card);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top:0;
+      z-index:100;
+      transition: background-color .3s ease, box-shadow .3s ease;
+    }
 
-/* Left logo container */
-header .logo-container {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem; /* space between image and text */
-}
+    header a i.fab.fa-youtube {
+    font-size: 2rem;       /* bigger icon */
+    color: #FF0000;        /* YouTube red */
+    margin-left: 60rem;     /* space from other items */
+    }
 
-/* Right side container */
-header .right-items {
-  display: flex;
-  align-items: center;
-  gap: 1rem;       /* spacing between YouTube and toggle */
-  margin-left: auto; /* push to the far right */
-}
+    header .theme-toggle {
+    margin-left: 1rem;     /* space from YouTube icon */
+  }
+   
+  header a i.fab.fa-youtube:hover {
+    color: #cc0000; /* Optional: slightly darker red on hover */
+    }
 
-/* YouTube icon styling */
-header .youtube-link i.fab.fa-youtube {
-  font-size: 2rem;  /* bigger icon */
-  color: #FF0000;   /* YouTube red */
-}
-
-header .youtube-link i.fab.fa-youtube:hover {
-  color: #cc0000;   /* slightly darker red on hover */
-}
-
-/* Theme toggle button spacing */
-header .theme-toggle {
-  font-size: 1.2rem;
-}
     .logo-container{ display:flex; align-items:center; gap:.6rem; }
     .logo-container img{ height:58px; width:auto; transition:transform .25s ease; }
     .logo-container:hover img{ transform:scale(1.03); }
@@ -432,21 +417,14 @@ margin-right: 6px;
 <body>
 
   <header>
-    <!-- Left side: Logo -->
     <div class="logo-container">
       <img id="logo" src="Data/nwb.svg" alt="NovelWave Logo">
       <span class="logo-text">NovelWaveHz</span>
     </div>
-  
-    <!-- Right side: YouTube icon + theme toggle -->
-    <div class="right-items">
-      <a href="https://www.youtube.com/@NovelWaveHz/" target="_blank" class="youtube-link">
-        <i class="fab fa-youtube"></i>
-      </a>
-      <button class="theme-toggle">🌙</button>
-    </div>
+   <div><a href="https://www.youtube.com/@NovelWaveHz/" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i> </a></div> 
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
   </header>
-  
+
   <main>
 
       <!-- Horizontal scroll wrapper for upload cards -->
@@ -474,6 +452,7 @@ margin-right: 6px;
 
       <section class="upload-section" aria-labelledby="orv-title">
         <div class="upload-text">
+          <h3></h3>
           <h4 id="orv-title"><em>Omniscient <br>Readers<br>Viewpoint</em></h4>
           <p class="muted">Status: On Hold</p>
           <a class="listen-now-btn" href="orv.html">Comming Soon</a>
