@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+  
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,10 +10,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
-    /*
-      Cleaned theme variables and unified dark-mode handling.
-      body.dark toggles dark mode by overriding variables.
-    */
+  
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Highly recommended for all CSS layouts */
+}
 
     :root{
       --bg: #f5f5f5;
@@ -61,32 +64,34 @@
       -moz-osx-font-smoothing:grayscale;
     }
 
-    header{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:0.8rem 1.2rem;
-      background-color: var(--card);
-      box-shadow: var(--shadow);
-      position: sticky;
-      top:0;
-      z-index:100;
-      transition: background-color .3s ease, box-shadow .3s ease;
-    }
+    header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* THIS PADDING: 1.2rem (right value) ensures space from the edge */
+    padding: 0.8rem 1.2rem; 
+    background-color: var(--card);
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: background-color .3s ease, box-shadow .3s ease;
+}
 
-    header a i.fab.fa-youtube {
-    font-size: 2rem;       /* bigger icon */
-    color: #FF0000;        /* YouTube red */
-    margin-left: 60rem;     /* space from other items */
-    }
+/* NEW: Container to group the YouTube icon and the theme toggle */
+.actions-container {
+    display: flex; 
+    align-items: center;
+    /* This 'gap' creates space BETWEEN the YouTube icon and the theme toggle */
+    gap: 1rem; 
+}
 
-    header .theme-toggle {
-    margin-left: 1rem;     /* space from YouTube icon */
-  }
-   
-  header a i.fab.fa-youtube:hover {
-    color: #cc0000; /* Optional: slightly darker red on hover */
-    }
+/* MODIFIED: The YouTube icon's specific styles */
+header a i.fab.fa-youtube {
+    font-size: 2rem;
+    color: #FF0000;
+    /* REMOVED: margin-left: auto; */ 
+}
 
     .logo-container{ display:flex; align-items:center; gap:.6rem; }
     .logo-container img{ height:58px; width:auto; transition:transform .25s ease; }
@@ -421,10 +426,11 @@ margin-right: 6px;
       <img id="logo" src="Data/nwb.svg" alt="NovelWave Logo">
       <span class="logo-text">NovelWaveHz</span>
     </div>
-   <div><a href="https://www.youtube.com/@NovelWaveHz/" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i> </a></div> 
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+    <div class="actions-container">
+      <a href="https://www.youtube.com/@NovelWaveHz/" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+    </div>
   </header>
-
   <main>
 
       <!-- Horizontal scroll wrapper for upload cards -->
@@ -460,7 +466,7 @@ margin-right: 6px;
         <div class="upload-image" aria-hidden="true">
           <img src="Data/ORV.png" alt="Omniscient Reader's Viewpoint cover">
         </div>
-        <audio id="sampleVoice" src="Data/.mp3"></audio>
+        <audio id="sampleVoice" src=""></audio>
         <div class="voice-container" role="region" aria-label="Voice sample">
           <div class="voice-label">(Male)</div>
           <button class="play-sample" onclick="playSample()" aria-label="Play sample">▶ Play Sample</button>
