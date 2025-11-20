@@ -332,6 +332,40 @@ margin-right: 6px;
 }
 
 /* Unique prefix: smw- (Support My Work) END*/
+
+/* Voice container */
+.voice-container{
+      width:100%;
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      background: var(--card);              /* match card in both modes */
+      padding: 12px 14px;
+      border-radius:10px;
+      margin-top:10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+      gap:14px;
+      border: 1px solid rgba(0,0,0,0.04);
+    }
+
+    /* ensure contrast in dark mode */
+    body.dark .voice-container{
+      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .voice-label{ font-size:16px; font-weight:600; color:var(--text); }
+    .play-sample{
+      background: var(--play-blue);
+      color: #4a90e2;
+      padding:2px 14px;
+      border-radius:6px;
+      cursor:pointer;
+      font-size:15px;
+      white-space:nowrap;
+      border:none;
+    }
+/* Voice container END */
   </style>
 </head>
 <body class="light">
@@ -371,6 +405,11 @@ margin-right: 6px;
         </div>
       </div>
       <p>An epic tale of a cunning Immortal reborn in a cruel world where strength rules.</p>
+    </div>
+    <audio id="sampleVoice" src="Data/RIBrian.mp3"></audio>
+    <div class="voice-container" role="region" aria-label="Voice sample">
+      <div class="voice-label">Brian (Male)</div>
+      <button class="play-sample" onclick="playSample()" aria-label="Play sample">▶ Play Sample</button>
     </div>
     
 
@@ -449,6 +488,17 @@ margin-right: 6px;
       localStorage.setItem("theme", isDark ? "dark" : "light");
     });
 
+     // ---------------------------
+    // Audio play
+    // ---------------------------
+    function playSample() {
+      const audio = document.getElementById("sampleVoice");
+      if (!audio) return;
+      audio.currentTime = 0;
+      audio.play().catch(err => {
+        console.warn('Audio play failed:', err);
+      });
+    }
 
 /********** Manual Arcs + Chapters **********/
 

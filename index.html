@@ -233,39 +233,6 @@ header a i.fab.fa-youtube {
       box-shadow: 0 6px 18px rgba(0,0,0,0.08);
     }
 
-    /* Voice container */
-    .voice-container{
-      width:100%;
-      display:flexbox;
-      justify-content:space-between;
-      align-items:flex-start;
-      background: var(--card);              /* match card in both modes */
-      padding: 12px 14px;
-      border-radius:10px;
-      margin-top:10px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.06);
-      gap:14px;
-      border: 1px solid rgba(0,0,0,0.04);
-    }
-
-    /* ensure contrast in dark mode */
-    body.dark .voice-container{
-      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
-      border: 1px solid rgba(255,255,255,0.04);
-    }
-
-    .voice-label{ font-size:16px; font-weight:600; color:var(--text); }
-    .play-sample{
-      background: var(--play-blue);
-      color: #fff;
-      padding:8px 14px;
-      border-radius:6px;
-      cursor:pointer;
-      font-size:14px;
-      white-space:nowrap;
-      border:none;
-    }
-
     /* Comment section */
     .comment-section{
       background-color: var(--card);
@@ -463,11 +430,6 @@ margin-right: 6px;
         <div class="upload-image" aria-hidden="true">
           <img src="Data/RI.png" alt="Reverend Insanity cover">
         </div>
-      <!--  <audio id="sampleVoice" src="Data/RIBrian.mp3"></audio>
-        <div class="voice-container" role="region" aria-label="Voice sample">
-          <div class="voice-label">Brian (Male)</div>
-          <button class="play-sample" onclick="playSample()" aria-label="Play sample">▶ Play Sample</button>
-        </div>-->
       </section>
 
       <section class="upload-section" aria-labelledby="orv-title">
@@ -480,11 +442,6 @@ margin-right: 6px;
         <div class="upload-image" aria-hidden="true">
           <img src="Data/ORV.png" alt="Omniscient Reader's Viewpoint cover">
         </div>
-       <!--  <audio id="sampleVoice" src=""></audio>
-        <div class="voice-container" role="region" aria-label="Voice sample">
-          <div class="voice-label">(Male)</div>
-          <button class="play-sample" onclick="playSample()" aria-label="Play sample">▶ Play Sample</button>
-        </div> -->
       </section>
 
     </div>
@@ -689,17 +646,6 @@ class="subscribe-image-link">
 
     loadComments();
 
-    // ---------------------------
-    // Audio play
-    // ---------------------------
-    function playSample() {
-      const audio = document.getElementById("sampleVoice");
-      if (!audio) return;
-      audio.currentTime = 0;
-      audio.play().catch(err => {
-        console.warn('Audio play failed:', err);
-      });
-    }
   </script>
 
 </body>
