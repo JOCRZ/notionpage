@@ -444,6 +444,19 @@ margin-right: 6px;
         </div>
       </section>
 
+      <section class="upload-section" aria-labelledby="orv-title">
+        <div class="upload-text">
+          <h3>Comming Soon</h3>
+          <h4 id="orv-title"><em>Omniscient <br>Readers<br>Viewpoint</em></h4>
+          <p class="muted">Status: On Hold</p>
+          <a class="listen-now-btn" href="orv.html">Listen Now</a>
+        </div>
+        <div class="upload-image" aria-hidden="true">
+          <img src="Data/ORV.png" alt="Omniscient Reader's Viewpoint cover">
+        </div>
+      </section>
+      
+
     </div>
 
     <button class="scroll-btn right" onclick="scrollRight()">▶</button>
@@ -536,33 +549,105 @@ class="subscribe-image-link">
   </footer>
 
   <script>
-    // Theme toggle (keeps your logo swap)
-    const toggleBtn = document.getElementById("themeToggle");
-    const body = document.body;
-    const logo = document.getElementById("logo");
+   // ------------------ THEME TOGGLE ------------------
+const toggleBtn = document.getElementById("themeToggle");
+const body = document.body;
+const logo = document.getElementById("logo");
 
-    function applyTheme(isDark) {
-      if (isDark) {
-        body.classList.add("dark");
-        toggleBtn.textContent = "☀️";
-        // ensure this file exists; fallback to same logo if not
-        logo.src = "Data/nww.svg";
-      } else {
-        body.classList.remove("dark");
-        toggleBtn.textContent = "🌙";
-        logo.src = "Data/nwb.svg";
-      }
-    }
+function applyTheme(isDark) {
+  if (isDark) {
+    body.classList.add("dark");
+    toggleBtn.textContent = "☀️";
+    logo.src = "Data/nww.svg";
+  } else {
+    body.classList.remove("dark");
+    toggleBtn.textContent = "🌙";
+    logo.src = "Data/nwb.svg";
+  }
+}
 
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") applyTheme(true);
+toggleBtn.addEventListener("click", () => {
+  const darkMode = !body.classList.contains("dark");
+  applyTheme(darkMode);
+});
 
-    toggleBtn.addEventListener("click", () => {
-      const isDark = !body.classList.contains("dark");
-      applyTheme(isDark);
-      localStorage.setItem("theme", isDark ? "dark" : "light");
-    });
+// ------------------ SLIDER LOGIC ------------------
+const wrapper = document.getElementById("slidesWrapper");
+const slides = document.querySelectorAll(".upload-section");
+const nextBtn = document.querySelector(".next");
+const prevBtn = document.querySelector(".prev");
 
+let index = 1;                // because first slide is a CLONE of last
+const total = slides.length;
+let width = wrapper.clientWidth;
+
+// Set initial slide
+wrapper.style.transform = `translateX(-${width * index}px)`;
+
+// Recalculate width on resize
+window.addEventListener("resize", () => {
+  width = wrapper.clientWidth;
+  wrapper.style.transition = "none";
+  wrapper.style.transform = `translateX(-${width * index}px)`;
+});
+
+// Go to next slide
+function nextSlide() {
+  if (index >= total - 1) return;
+  index++;
+  wrapper.style.transition = "transform 0.45s ease-in-out";
+  wrapper.style.transform = `translateX(-${width * index}px)`;
+}
+
+// Go to previous slide
+function prevSlide() {
+  if (index <= 0) return;
+  index--;
+  wrapper.style.transition = "transform 0.45s ease-in-out";
+  wrapper.style.transform = `translateX(-${width * index}px)`;
+}
+
+// Infinite loop fix
+wrapper.addEventListener("transitionend", () => {
+  const current = slides[index];
+
+  if (current.getAttribute("aria-labelledby") === "ri-title" && index === total - 1) {
+    wrapper.style.transition = "none";
+    index = 1;
+    wrapper.style.transform = `translateX(-${width * index}px)`;
+  }
+
+  if (current.getAttribute("aria-labelledby") === "orv-title" && index === 0) {
+    wrapper.style.transition = "none";
+    index = total - 2;
+    wrapper.style.transform = `translateX(-${width * index}px)`;
+  }
+});
+
+// Desktop arrow controls (no mouse drag)
+nextBtn.addEventListener("click", nextSlide);
+prevBtn.addEventListener("click", prevSlide);
+
+// ------------------ TOUCH CONTROL (MOBILE ONLY) ------------------
+let startX = 0;
+let endX = 0;
+
+wrapper.addEventListener("touchstart", (e) => {
+  startX = e.touches[0].clientX;
+});
+
+wrapper.addEventListener("touchmove", (e) => {
+  endX = e.touches[0].clientX;
+});
+
+wrapper.addEventListener("touchend", () => {
+  let diff = startX - endX;
+
+  if (Math.abs(diff) > 50) {
+    if (diff > 0) nextSlide();  // swipe left → next
+    else prevSlide();           // swipe right → prev
+  }
+});
     
 
     // ---------- COMMENT SECTION SCRIPT ----------
