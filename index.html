@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NovelWaveHz</title>
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="Data/NWheadlogo.png">
+  <link rel="icon" type="image/png" href="Data/NWheadlogo.png" />
 
-  <!-- Font Awesome for icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
-    /*=======================================
-      Root Theme Color Variables for Light & Dark Modes
-    =======================================*/
     :root {
       --bg: #f5f5f5;
       --card: #ffffff;
@@ -31,7 +29,6 @@
       --comment-highlight: #305caa;
       --max-width: 900px;
     }
-
     body.dark {
       --bg: #2e2e2e;
       --card: #343434;
@@ -46,16 +43,8 @@
       --comment-border: #666;
       --comment-highlight: #99b7ff;
     }
-
-    /*=======================================
-      Global Layout & Reset Styles
-    =======================================*/
-    * {
-      box-sizing: border-box;
-    }
-
-    html,
-    body {
+    * { box-sizing: border-box; }
+    html, body {
       height: 100%;
       margin: 0;
       padding: 0;
@@ -69,10 +58,28 @@
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
-
-    /*=======================================
-      Header Styles (Logo, YouTube, Theme Toggle)
-    =======================================*/
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      padding: 1rem;
+      max-width: var(--max-width);
+      margin: 1rem auto;
+      animation: fadeIn 0.4s ease;
+      width: calc(100% - 2rem);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px);}
+      to { opacity: 1; transform: none;}
+    }
+    .horizontal-scroll-wrapper { position: relative; }
+    @media (max-width: 600px) { #sliderArea {overflow-x: auto;}}
+    @media (max-width: 480px) { #comment-card {font-size: 0.95em;} }
+    @media (max-width: 600px) {
+      .logo-container img {height: 40px;}
+      .comment-section {padding: 1rem 0.3rem;}
+    }
     header {
       display: flex;
       justify-content: space-between;
@@ -85,46 +92,25 @@
       z-index: 100;
       transition: background-color 0.3s ease, box-shadow 0.3s ease;
     }
-
-    /* Logo container styles */
     .logo-container {
       display: flex;
       align-items: center;
       gap: 0.6rem;
     }
-
     .logo-container img {
       height: 58px;
       width: auto;
       transition: transform 0.25s ease;
     }
-
-    .logo-container:hover img {
-      transform: scale(1.03);
-    }
-
-    /* Logo text */
+    .logo-container:hover img { transform: scale(1.03);}
     .logo-text {
       font-weight: 700;
       font-size: clamp(1.3rem, 2.2vw, 1.8rem);
       letter-spacing: 2px;
       color: var(--text);
     }
-
-    /* Container for YouTube icon and theme toggle button */
-    .actions-container {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    /* YouTube icon styles */
-    header a i.fab.fa-youtube {
-      font-size: 2rem;
-      color: #FF0000;
-    }
-
-    /* Theme toggle button */
+    .actions-container { display: flex; align-items: center; gap: 1rem;}
+    header a i.fab.fa-youtube { font-size: 2rem; color: #FF0000;}
     .theme-toggle {
       background: none;
       border: 2px solid var(--muted);
@@ -139,165 +125,15 @@
       cursor: pointer;
       transition: all 0.25s ease;
     }
-
     .theme-toggle:hover {
       background-color: var(--muted);
       color: var(--bg);
     }
-
-    /*=======================================
-      Main Content Styles (Upload Cards, Comments)
-    =======================================*/
-    main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      padding: 1rem;
-      max-width: var(--max-width);
-      margin: 1rem auto;
-      animation: fadeIn 0.4s ease;
-      width: calc(100% - 2rem);
+    /* FIX: Improved dark mode contrast for theme toggle hover */
+    body.dark .theme-toggle:hover {
+      background-color: var(--accent);
+      color: var(--button-bg); /* Use dark text against the accent color */
     }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(8px);
-      }
-
-      to {
-        opacity: 1;
-        transform: none;
-      }
-    }
-
-    /* Horizontal scroll container for upload cards */
-    .horizontal-scroll-wrapper {
-      position: relative;
-    }
-
-    .upload-cards-container {
-      display: flex;
-      gap: 1.5rem;
-      overflow-x: auto;
-      scroll-behavior: smooth;
-      padding: 1rem 0;
-    }
-
-    /* Custom horizontal scrollbar */
-    .upload-cards-container::-webkit-scrollbar {
-      height: 8px;
-    }
-
-    .upload-cards-container::-webkit-scrollbar-thumb {
-      background-color: rgba(0, 0, 0, 0.2);
-      border-radius: 4px;
-    }
-
-    /* Scroll buttons styles */
-    .scroll-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-60%);
-      background-color: var(--card);
-      border: none;
-      border-radius: 10%;
-      padding: 0.3rem;
-      cursor: pointer;
-      box-shadow: var(--shadow);
-      z-index: 10;
-      display: none;
-    }
-
-    .scroll-btn.left {
-      left: -50px;
-    }
-
-    .scroll-btn.right {
-      right: -50px;
-    }
-
-    .scroll-btn:hover {
-      transform: translateY(-50%) scale(1.1);
-    }
-
-    /* Show scroll buttons on wider screens */
-    @media (min-width: 768px) {
-      .scroll-btn {
-        display: block;
-      }
-    }
-
-    /* Upload section card styling */
-    .upload-section {
-      background-color: var(--card);
-      border-radius: 16px;
-      padding: 1.5rem;
-      display: contents;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 1.5rem;
-      box-shadow: var(--shadow);
-      text-align: center;
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    /* Upload text styles */
-    .upload-text h3 {
-      margin: 0;
-      font-size: 0.9rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .upload-text h4 {
-      margin: 0.1rem 0;
-      font-size: clamp(1.3rem, 5vw, 2.2rem);
-      font-family: Georgia, serif;
-      font-style: italic;
-      line-height: 1.15;
-      color: var(--text);
-    }
-
-    .upload-text p {
-      margin: 0.3rem 0 1rem;
-      color: var(--muted);
-      font-style: italic;
-    }
-
-    /* Upload listen now buttons */
-    .upload-text a {
-      background-color: var(--button-bg);
-      color: var(--button-text);
-      padding: 0.56rem 0.5rem;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      display: inline-block;
-      transition: transform 0.2s ease, opacity 0.2s ease;
-    }
-
-    .upload-text a:hover {
-      transform: scale(1.03);
-      opacity: 0.94;
-    }
-
-    /* Upload image styling */
-    .upload-image img {
-      width: 175px;
-      height: 242px;
-      border-radius: 12px;
-      object-fit: cover;
-      background-color: #ccc;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-    }
-
-    /*=======================================
-      Comment Section Styles
-    =======================================*/
     .comment-section {
       background-color: var(--card);
       border-radius: 16px;
@@ -307,12 +143,7 @@
       text-align: center;
       transition: background-color 0.3s ease, box-shadow 0.3s ease;
     }
-
-    .comment-section h3 {
-      color: var(--text);
-      margin-bottom: 1rem;
-    }
-
+    .comment-section h3 { color: var(--text); margin-bottom: 1rem;}
     #comment-container {
       width: 100%;
       max-width: 600px;
@@ -321,7 +152,6 @@
       align-items: center;
       justify-content: center;
     }
-
     #comment-card {
       width: 100%;
       padding: 18px 24px;
@@ -334,21 +164,17 @@
       align-items: flex-start;
       text-align: left;
     }
-
     #commentor-name {
       font-weight: bold;
       font-size: 1.05em;
       color: var(--comment-highlight);
       margin-bottom: 8px;
     }
-
     #comment-text {
       font-size: 1.02em;
       color: var(--text);
       line-height: 1.4;
     }
-
-    /* Comment section buttons */
     .comment-section button {
       padding: 10px 15px;
       font-size: 1em;
@@ -359,36 +185,25 @@
       border-radius: 5px;
       transition: transform 0.2s ease, opacity 0.2s ease;
     }
-
     .comment-section button:hover {
       transform: scale(1.03);
       opacity: 0.95;
     }
-
     .comment-section button:disabled {
       background-color: #999;
       cursor: not-allowed;
     }
-
-    /*=======================================
-      Advertisement Styles
-    =======================================*/
     .ad-section {
       width: 100%;
       max-width: 300px;
       margin: 20px auto;
       text-align: center;
     }
-
     .ad-section img {
       width: 100%;
       border-radius: 10px;
       display: block;
     }
-
-    /*=======================================
-      Footer Thank You Card Styles
-    =======================================*/
     .thank-card {
       background: var(--card);
       padding: 1.6rem;
@@ -399,27 +214,14 @@
       margin: 0 auto 2rem;
       color: var(--text);
     }
-
-    .thank-card h1 {
-      margin: 0 0 12px 0;
-      font-size: 22px;
-      line-height: 1.15;
-    }
-
-    .thank-card p.lead {
-      margin: 0 0 18px 0;
-      color: var(--muted);
-      font-size: 15px;
-    }
-
-    /* Stats display */
+    .thank-card h1 { margin: 0 0 12px 0; font-size: 22px; line-height: 1.15;}
+    .thank-card p.lead { margin: 0 0 18px 0; color: var(--muted); font-size: 15px;}
     .stats {
       display: flex;
       gap: 14px;
       flex-wrap: wrap;
       margin-bottom: 12px;
     }
-
     .stat {
       background: rgba(0, 0, 0, 0.03);
       padding: 12px 14px;
@@ -427,53 +229,32 @@
       min-width: 140px;
       flex: 1 1 140px;
     }
-
-    body.dark .stat {
-      background: rgba(255, 255, 255, 0.02);
-    }
-
-    .stat .label {
-      display: block;
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 6px;
-    }
-
-    .stat .value {
-      font-weight: 600;
-      font-size: 18px;
-      color: var(--text);
-    }
-
-    /*=======================================
-      Support My Work Section (smw- prefix)
-    =======================================*/
+    body.dark .stat { background: rgba(255, 255, 255, 0.02);}
+    .stat .label { display: block; font-size: 13px; color: var(--muted);margin-bottom: 6px;}
+    .stat .value { font-weight: 600; font-size: 18px; color: var(--text);}
     .smw-container {
       margin: 0 auto;
-      background: #ffffff;
+      background: #fff;
       max-width: 600px;
       width: 100%;
       padding: 40px;
       border-radius: 22px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
       text-align: center;
       font-family: Arial, sans-serif;
     }
-
     .smw-title {
       font-size: 2rem;
       margin-bottom: 12px;
       color: #111827;
       font-weight: 700;
     }
-
     .smw-text {
       font-size: 1rem;
       color: #6b7280;
       margin-bottom: 28px;
       line-height: 1.6;
     }
-
     .smw-button {
       display: inline-block;
       background: #ffdd00;
@@ -485,83 +266,25 @@
       text-decoration: none;
       transition: transform 0.15s ease, opacity 0.15s ease;
     }
-
     .smw-button:hover {
       transform: scale(1.05);
       opacity: 0.9;
     }
-
-    .smw-emoji {
-      font-size: 1.3rem;
-      margin-right: 6px;
-    }
-
-    /*=======================================
-      Subscribe Ad Section Styles
-    =======================================*/
+    .smw-emoji { font-size: 1.3rem; margin-right: 6px;}
     .subscribe-image-box {
       width: 100%;
       max-width: 400px;
       margin: 20px auto;
       text-align: center;
     }
-
-    .subscribe-image {
-      width: 100%;
-      border-radius: 10px;
-      display: block;
-    }
-
-    /*=======================================
-      Responsive Layout Adjustments
-    =======================================*/
+    .subscribe-image { width: 100%; border-radius: 10px; display: block; }
     @media (min-width: 600px) {
-      footer nav {
-        flex-direction: row;
-        justify-content: center;
-        gap: 1.5rem;
-      }
-
-      .upload-section {
-        flex-direction: row;
-        text-align: left;
-      }
-
-      .upload-text {
-        flex: 1;
-      }
+      footer nav { flex-direction: row; justify-content: center; gap: 1.5rem; }
     }
+    @media (max-width: 480px) and (orientation: portrait) { .voice-sample-box {padding-bottom: 20px !important;} }
 
-    @media (max-width: 600px) {
-      .upload-image img {
-        width: 150px;
-        height: 210px;
-      }
-
-      .logo-container img {
-        height: 48px;
-      }
-    }
-
-    @media (max-width: 480px) and (orientation: portrait) {
-      .voice-sample-box {
-        padding-bottom: 20px !important;
-      }
-
-      .listen-now-btn {
-        margin-top: 14px !important;
-      }
-    }
-
-    @media (min-width: 700px) {
-      .voice-sample-box {
-        max-width: 320px;
-        width: 100%;
-      }
-    }
-
-    /* Footer styles */
-    footer {
+     /* Footer styles */
+     footer {
       margin-top: 1rem;
       background: var(--card);
       padding: 0.8rem;
@@ -588,13 +311,10 @@
     }
   </style>
 </head>
-
 <body class="light">
-
-  <!-- Header section with logo, YouTube link, and theme toggle -->
   <header>
     <div class="logo-container">
-      <img id="logo" src="Data/nwb.svg" alt="NovelWave Logo">
+      <img id="logo" src="Data/nwb.svg" alt="NovelWave Logo" />
       <span class="logo-text">NovelWaveHz</span>
     </div>
     <div class="actions-container">
@@ -604,255 +324,138 @@
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
     </div>
   </header>
-
   <main>
-
-    <!-- Upload cards horizontal scroll wrapper -->
-    <div class="horizontal-scroll-wrapper" aria-label="Upload novel cards with horizontal scroll">
-      <button class="scroll-btn left" onclick="scrollLeft()" aria-label="Scroll left">◀</button>
-
-      <div class="upload-cards-container">
-        <!-- Upload card: Reverend Insanity -->
-        <section class="upload-section" aria-labelledby="ri-title">
-          <div class="upload-text">
-            <h3>CURRENTLY UPLOADING</h3>
-            <h4 id="ri-title"><em>Reverend<br>Insanity</em></h4>
-            <p class="muted">Status: Ongoing</p>
-            <a class="listen-now-btn" href="ri.html">Listen Now</a>
-          </div>
-          <div class="upload-image" aria-hidden="true">
-            <img src="Data/RI.png" alt="Reverend Insanity cover">
-          </div>
-        </section>
-
-        <!-- Upload card placeholders for coming soon -->
-        <section class="upload-section" aria-labelledby="tpr-title">
-          <div class="upload-text">
-            <h3>Coming Soon</h3>
-            <h4 id="tpr-title"><em>The <br>Perfect Run</em></h4>
-            <p class="muted">Status: On Hold</p>
-            <a class="listen-now-btn" href="orv.html">Listen Now</a>
-          </div>
-          <div class="upload-image" aria-hidden="true">
-            <img src="Data/TPR.jpg" alt="The Perfect Run cover">
-          </div>
-        </section>
-
-        <section class="upload-section" aria-labelledby="orv-title">
-          <div class="upload-text">
-            <h3>Coming Soon</h3>
-            <h4 id="orv-title"><em>Omniscient<br>Readers<br>Viewpoint</em></h4>
-            <p class="muted">Status: On Hold</p>
-            <a class="listen-now-btn" href="orv.html">Listen Now</a>
-          </div>
-          <div class="upload-image" aria-hidden="true">
-            <img src="Data/ORV.png" alt="Omniscient Reader's Viewpoint cover">
-          </div>
-        </section>
-
-        <section class="upload-section" aria-labelledby="ss-title">
-          <div class="upload-text">
-            <h3>Coming Soon</h3>
-            <h4 id="ss-title"><em>Shadow <br>Slave</em></h4>
-            <p class="muted">Status: On Hold</p>
-            <a class="listen-now-btn" href="orv.html">Listen Now</a>
-          </div>
-          <div class="upload-image" aria-hidden="true">
-            <img src="Data/SS.jpg" alt="Shadow Slave cover">
-          </div>
-        </section>
+    <div class="horizontal-scroll-wrapper" aria-label="Novel slider">
+      <div id="sliderArea" class="relative bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden p-2 md:p-8 max-w-5xl mx-auto">
+        <button id="prevBtn" class="absolute left-2 md:left-8 z-10 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg transition-all duration-300 hover:scale-110" aria-label="Previous item">
+          <i data-lucide="chevron-left" class="w-6 h-6 text-gray-800"></i>
+        </button>
+        <div id="slideContent" class="flex flex-row items-center gap-4 md:gap-16 max-w-5xl mx-auto"></div>
+        <button id="nextBtn" class="absolute right-2 md:right-8 z-10 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg transition-all duration-300 hover:scale-110" aria-label="Next item">
+          <i data-lucide="chevron-right" class="w-6 h-6 text-gray-800"></i>
+        </button>
+        <div class="flex justify-center gap-2 pb-8" id="dots"></div>
       </div>
-
-      <button class="scroll-btn right" onclick="scrollRight()" aria-label="Scroll right">▶</button>
     </div>
-
-    <!-- Subscribe clickable image -->
     <a href="https://www.youtube.com/@NovelWaveHz?sub_confirmation=1" target="_blank" rel="noopener noreferrer" class="subscribe-image-link" aria-label="Subscribe to NovelWaveHz channel">
       <div class="subscribe-image-box">
         <img src="Data/sub.png" alt="Subscribe Button" class="subscribe-image" />
       </div>
     </a>
-
-    <!-- Comment section -->
     <section class="comment-section" aria-labelledby="comments-heading">
       <h3 id="comments-heading">@NovelWaveHz Comments</h3>
-
       <div id="comment-container">
         <article id="comment-card" role="article" aria-live="polite" aria-atomic="true">
           <div id="commentor-name">Loading...</div>
           <div id="comment-text"></div>
         </article>
       </div>
-
       <button id="prev-button" disabled aria-label="View Previous Comment">View Previous Comment</button>
     </section>
-
   </main>
-
-  <!-- Advertisement section -->
   <div class="ad-section" aria-label="Advertisement">
     <a href="https://elevenreader.io/referral/a4KMjhx6" target="_blank" rel="noopener noreferrer">
       <img src="Data/ad.jpg" alt="Advertisement" />
     </a>
   </div>
-
-  <!-- Thank you/support section -->
   <section class="thank-card" aria-labelledby="thank-heading">
     <h1 id="thank-heading">Thank you for your support</h1>
     <p class="lead">I want to express my sincere gratitude to everyone who used referral link.</p>
-
     <div class="stats" role="list" aria-label="Referral statistics">
-      <div class="stat" role="listitem">
-        <span class="label">Total Referrals</span>
-        <span class="value">6</span>
-      </div>
-
-      <div class="stat" role="listitem">
-        <span class="label">Listening Hours Earned</span>
-        <span class="value">30</span>
-      </div>
-
-      <div class="stat" role="listitem">
-        <span class="label">Projected Chapters</span>
-        <span class="value">150</span>
-      </div>
-
-      <div class="stat" role="listitem">
-        <span class="label">Estimated Savings</span>
+      <div class="stat" role="listitem"><span class="label">Total Referrals</span><span class="value">6</span></div>
+      <div class="stat" role="listitem"><span class="label">Listening Hours Earned</span><span class="value">30</span></div>
+      <div class="stat" role="listitem"><span class="label">Projected Chapters</span><span class="value">150</span></div>
+      <div class="stat" role="listitem"><span class="label">Estimated Savings</span>
         <div class="value">
           <span class="usd">USD: <strong>$10.66</strong></span><br />
           <span class="inr">INR: <strong>₹888</strong></span>
         </div>
       </div>
     </div>
-
-    <!-- Support My Work container -->
     <div class="smw-container">
       <h1 class="smw-title">Support My Work</h1>
       <p class="smw-text">
         Since the channel isn’t monetized right now, your support helps me keep creating the content you enjoy.
-        <br />
-        Your contribution no matter the amount truly makes a difference.
-        <br />
-        If you value the content, please consider supporting the channel.
+        <br />Your contribution no matter the amount truly makes a difference.
+        <br />If you value the content, please consider supporting the channel.
       </p>
       <a class="smw-button" href="https://buymeacoffee.com/Jo3416" target="_blank" rel="noopener noreferrer">
         <span class="smw-emoji">☕</span>Buy Me a Coffee
       </a>
     </div>
   </section>
-
-  <!-- Footer Section with Social Links -->
   <footer>
     <nav aria-label="Social media navigation">
-      <a href="https://www.youtube.com/@NovelWaveHz/" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-        <i class="fab fa-youtube"></i>
-      </a>
-      <a href="https://www.instagram.com/novelwavehz" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-        <i class="fab fa-instagram"></i>
-      </a>
-      <a href="mailto:proxyac31@gmail.com" aria-label="Email">
-        <i class="fas fa-envelope"></i>
-      </a>
-      <a href="https://buymeacoffee.com/Jo3416" target="_blank" rel="noopener noreferrer" aria-label="Buy Me a Coffee">
-        <i class="fas fa-mug-hot"></i>
-      </a>
+      <a href="https://www.youtube.com/@NovelWaveHz/" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+      <a href="https://www.instagram.com/novelwavehz" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="mailto:proxyac31@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+      <a href="https://buymeacoffee.com/Jo3416" target="_blank" rel="noopener noreferrer" aria-label="Buy Me a Coffee"><i class="fas fa-mug-hot"></i></a>
     </nav>
   </footer>
-
-  <!--=======================================
-    JavaScript Section
-    Handles theme toggle and comment rotation
-  =======================================-->
   <script>
-    // Theme toggle button refs
     const toggleBtn = document.getElementById("themeToggle");
     const body = document.body;
     const logo = document.getElementById("logo");
 
-    // Function to apply chosen theme
+    // FIX: Corrected logic to ensure the logo source changes properly based on the theme
     function applyTheme(isDark) {
       if (isDark) {
         body.classList.add("dark");
         toggleBtn.textContent = "☀️";
-        logo.src = "Data/nww.svg"; // Dark mode logo
+        logo.src = "Data/nww.svg"; // Path for white logo in dark mode
       } else {
         body.classList.remove("dark");
         toggleBtn.textContent = "🌙";
-        logo.src = "Data/nwb.svg"; // Light mode logo
+        logo.src = "Data/nwb.svg"; // Path for black logo in light mode
       }
     }
-
-    // Load saved theme on page load
+    
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "dark") applyTheme(true);
-
-    // Theme toggle button event
+    
     toggleBtn.addEventListener("click", () => {
       const isDark = !body.classList.contains("dark");
       applyTheme(isDark);
       localStorage.setItem("theme", isDark ? "dark" : "light");
     });
 
-    // ---------- COMMENT SECTION SCRIPT ----------
+    // Comments rotation
     const commentorName = document.getElementById('commentor-name');
     const commentText = document.getElementById('comment-text');
     const prevButton = document.getElementById('prev-button');
     const COMMENT_INTERVAL_MS = 5000;
-
-    let comments = [];
-    let history = [];
-    let intervalId;
-
-    // Load and parse comments file
+    let comments = [], history = [], intervalId;
     async function loadComments() {
       try {
         const response = await fetch('Data/comments.txt');
         const text = await response.text();
         comments = text.split('\n').map(line => {
           let [commentor, ...commentParts] = line.split(':');
-          return {
-            commentor: commentor ? commentor.trim() : '',
-            commentText: commentParts.join(':').trim()
-          };
+          return {commentor: commentor ? commentor.trim() : '',commentText: commentParts.join(':').trim()};
         }).filter(c => c.commentor && c.commentText);
-
         if (comments.length === 0) {
-          commentorName.textContent = "No comments found.";
-          commentText.textContent = "";
-          return;
+          commentorName.textContent = "No comments found.";commentText.textContent = "";return;
         }
-
         startCommentRotation();
       } catch (error) {
         commentorName.textContent = "Error loading comments.";
         commentText.textContent = "Make sure 'comments.txt' exists and is accessible.";
       }
     }
-
-    // Display a random comment, avoiding repeats
     function displayRandomComment() {
       if (comments.length === 0) return;
       let randomIndex = Math.floor(Math.random() * comments.length);
       let previousIndex = history.length > 0 ? history[history.length - 1] : -1;
-
-      while (randomIndex === previousIndex && comments.length > 1) {
-        randomIndex = Math.floor(Math.random() * comments.length);
-      }
-
+      while (randomIndex === previousIndex && comments.length > 1) {randomIndex = Math.floor(Math.random() * comments.length);}
       history.push(randomIndex);
       if (history.length > 10) history.shift();
       setComment(comments[randomIndex]);
       updatePrevButtonState();
     }
-
-    // Set comment content to display
     function setComment(comment) {
       commentorName.textContent = comment.commentor;
       commentText.textContent = comment.commentText;
     }
-
-    // View previous comment in history stack
     function viewPreviousComment() {
       if (history.length <= 1) return;
       history.pop();
@@ -864,49 +467,82 @@
       updatePrevButtonState();
       resetCommentRotation();
     }
-
-    // Enable or disable previous button depending on history length
-    function updatePrevButtonState() {
-      prevButton.disabled = history.length <= 1;
-    }
-
-    // Start automatic comment rotation
+    function updatePrevButtonState() {prevButton.disabled = history.length <= 1;}
     function startCommentRotation() {
       displayRandomComment();
       intervalId = setInterval(displayRandomComment, COMMENT_INTERVAL_MS);
     }
-
-    // Reset the comment rotation timer
     function resetCommentRotation() {
       clearInterval(intervalId);
       intervalId = setInterval(displayRandomComment, COMMENT_INTERVAL_MS);
     }
-
-    // Previous comment button event listener
     prevButton.addEventListener('click', viewPreviousComment);
-
-    // Initiate comment loading on page load
     loadComments();
 
-    // Scroll functions for horizontal scroll wrapper
-    function scrollLeft() {
-      const container = document.querySelector('.upload-cards-container');
-      container.scrollBy({
-        left: -300,
-        behavior: 'smooth'
-      });
+    // Slider with responsive fixes for mobile
+    const movies = [
+  {
+    title: "Reverend Insanity",
+    rating: "R+",
+    genres: "Xianxia, Dark-fantasy, Psychological, Isekai, Action.",
+    poster: "https://raw.githubusercontent.com/JOCRZ/notionpage/main/Data/RI.png"
+  },
+  {
+    title: "The Omniscent Reader's View Point",
+    rating: "PG-13",
+    genres: "Reverse-Isekai, Apocalypse, Fantasy, Action, Adventure.",
+    poster: "https://raw.githubusercontent.com/JOCRZ/notionpage/main/Data/ORV.png"
+  },
+  {
+    title: "Shadow Slave",
+    rating: "PG-13",
+    genres: "Post-Apocalyptic, Action, Adventure, System, Romance.",
+    poster: "https://raw.githubusercontent.com/JOCRZ/notionpage/main/Data/SS.jpg"
+  }
+];
+    let currentSlide = 0;
+    const slideContent = document.getElementById("slideContent");
+    const dotsContainer = document.getElementById("dots");
+    function renderSlide() {
+      const m = movies[currentSlide];
+      slideContent.innerHTML = `
+        <div class="flex-1 text-center md:text-left space-y-3 md:space-y-6">
+          <h1 class="text-2xl md:text-7xl font-bold text-gray-900">${m.title}</h1>
+          <div class="flex items-center gap-1 md:gap-3 text-gray-600 text-sm md:text-xl justify-center md:justify-start">
+            <span class="font-semibold">${m.rating}</span>
+            <span class="text-gray-400">|</span>
+            <span>${m.genres}</span>
+          </div>
+        </div>
+        <div class="flex-shrink-0">
+          <div class="relative group">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
+            <img src="${m.poster}" alt="${m.title}"
+              class="w-32 h-48 md:w-80 md:h-[480px] object-cover rounded-2xl shadow-2xl transition-transform duration-300 group-hover:scale-105" />
+          </div>
+        </div>
+      `;
+      renderDots(); lucide.createIcons();
     }
-
-    function scrollRight() {
-      const container = document.querySelector('.upload-cards-container');
-      container.scrollBy({
-        left: 300,
-        behavior: 'smooth'
-      });
+    function renderDots() {
+      dotsContainer.innerHTML = movies.map((_, i) =>
+        `<button onclick="goToSlide(${i})" class="h-2 rounded-full transition-all duration-300 ${i===currentSlide?"w-8 bg-black":"w-2 bg-gray-400 hover:bg-gray-600"}"></button>`
+      ).join("");
     }
-
+    function nextSlide() {currentSlide = (currentSlide + 1) % movies.length;renderSlide();}
+    function prevSlide() {currentSlide = (currentSlide - 1 + movies.length) % movies.length;renderSlide();}
+    function goToSlide(index) {currentSlide = index;renderSlide();}
+    document.getElementById("nextBtn").onclick = nextSlide;
+    document.getElementById("prevBtn").onclick = prevSlide;
+    let startX = 0;
+    const sliderArea = document.getElementById("sliderArea");
+    sliderArea.addEventListener("touchstart",(e)=>{startX = e.touches[0].clientX;});
+    sliderArea.addEventListener("touchend",(e)=>{
+      const endX = e.changedTouches[0].clientX;
+      if (startX - endX > 50) nextSlide();
+      if (endX - startX > 50) prevSlide();
+    });
+    renderSlide();
   </script>
-
 </body>
-
 </html>
