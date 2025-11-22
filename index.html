@@ -70,6 +70,7 @@
     }
     .horizontal-scroll-wrapper { position: relative; }
 
+
     #sliderArea {
       -webkit-overflow-scrolling: touch;
       scroll-behavior: smooth;
@@ -350,6 +351,7 @@
     const body = document.body;
     const logo = document.getElementById("logo");
 
+
     function applyTheme(isDark) {
       if (isDark) {
         body.classList.add("dark");
@@ -368,6 +370,7 @@
       applyTheme(isDark);
       localStorage.setItem("theme", isDark ? "dark" : "light");
     });
+
 
     // Comments logic
     const commentorName = document.getElementById('commentor-name');
@@ -429,12 +432,13 @@
     prevButton.addEventListener('click', viewPreviousComment);
     loadComments();
 
+
     // Slider JS
     const movies = [
-      { title: "Reverend Insanity", rating: "R+", genres: "Xianxia, Dark-fantasy, Isekai.", poster: "https://raw.githubusercontent.com/JOCRZ/notionpage/main/Data/RI.png", detailPage: "ri.html" },
-      { title: "The Pefect Run", rating: "PG-13", genres: "Superpower, Action, Adventure.", poster: "https://raw.githubusercontent.com/JOCRZ/notionpage/main/Data/TPR.png", detailPage: "soon.html" },
-      { title: "Omniscent Reader's View Point", rating: "PG-13", genres: "Reverse-Isekai, Apocalypse, Action.", poster: "https://raw.githubusercontent.com/JOCRZ/notionpage/main/Data/ORV.jpg", detailPage: "soon.html" },
-      { title: "Shadow Slave", rating: "PG-13", genres: "Post-Apocalyptic, System, Action.", poster: "https://raw.githubusercontent.com/JOCRZ/notionpage/main/Data/SS.jpg", detailPage: "soon.html" }
+      { title: "Reverend Insanity", status: "Ongoing", poster: "https://raw.githubusercontent.com/JOCRZ/notionpage/main/Data/RI.png", detailPage: "ri.html" },
+      { title: "The Perfect Run", status: "Completed", poster: "https://raw.githubusercontent.com/JOCRZ/notionpage/main/Data/TPR.png", detailPage: "soon.html" },
+      { title: "Omniscent Reader's View Point", status: "Ongoing", poster: "https://raw.githubusercontent.com/JOCRZ/notionpage/main/Data/ORV.jpg", detailPage: "soon.html" },
+      { title: "Shadow Slave", status: "Ongoing", poster: "https://raw.githubusercontent.com/JOCRZ/notionpage/main/Data/SS.jpg", detailPage: "soon.html" }
     ];
     let currentSlide = 0;
     const slideContent = document.getElementById("slideContent");
@@ -444,10 +448,8 @@
       slideContent.innerHTML = `
         <div class="flex-1 text-center md:text-left space-y-3 md:space-y-6">
           <h1 class="text-2xl md:text-7xl font-bold text-gray-900">${m.title}</h1>
-          <div class="flex items-center gap-1 md:gap-3 text-gray-600 text-sm md:text-xl justify-center md:justify-start">
-            <span class="font-semibold">${m.rating}</span>
-            <span class="text-gray-400">|</span>
-            <span>${m.genres}</span>
+          <div class="text-gray-600 text-sm md:text-xl justify-center md:justify-start font-semibold">
+            Status: ${m.status}
           </div>
         </div>
         <div class="flex-shrink-0">
