@@ -75,12 +75,11 @@
       scroll-behavior: smooth;
       scroll-snap-type: x mandatory;
       position: relative;
-      overflow: visible !important;   /* Key: Let arrows appear outside card */
+      overflow: visible !important;   /* Show arrows outside the card */
     }
     #slideContent > * {
       scroll-snap-align: start;
     }
-    /* Arrows vertically centered and outside */
     #prevBtn, #nextBtn {
       top: 50%;
       transform: translateY(-50%);
@@ -99,7 +98,7 @@
       transform: translateY(-50%) scale(1.12);
     }
     #prevBtn {
-      left: -54px;  /* Place arrow completely outside */
+      left: -54px;
     }
     #nextBtn {
       right: -54px;
@@ -126,11 +125,9 @@
       #prevBtn, #nextBtn {
         padding: 10px !important;
       }
-      #prevBtn { left: -18px !important;}
-      #nextBtn { right: -18px !important;}
+      #prevBtn { left: -14px !important;}
+      #nextBtn { right: -14px !important;}
     }
-    /* --- Other UI/section/mobile improvements as before --- */
-    /* (You can collapse these if you already have them) */
     header {
       display: flex;
       justify-content: space-between;
@@ -152,7 +149,119 @@
     .theme-toggle { background: none; border: 2px solid var(--muted); color: var(--text); border-radius: 50%; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; cursor: pointer; transition: all 0.25s ease;}
     .theme-toggle:hover { background-color: var(--muted); color: var(--bg);}
     body.dark .theme-toggle:hover { background-color: var(--accent); color: var(--button-bg);}
-    /* --- (Include your previous section/comment/footer/mobile CSS, unchanged) --- */
+    .comment-section {
+      background-color: var(--card);
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+      box-shadow: var(--shadow);
+      margin-top: 2rem;
+      text-align: center;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .comment-section h3 { color: var(--text); margin-bottom: 1rem;}
+    #comment-container {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #comment-card {
+      width: 100%;
+      padding: 18px 24px;
+      border-radius: 10px;
+      background-color: var(--comment-bg);
+      border: 1.5px solid var(--comment-border);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+    }
+    #commentor-name { font-weight: bold; font-size: 1.05em; color: var(--comment-highlight); margin-bottom: 8px; }
+    #comment-text { font-size: 1.02em; color: var(--text); line-height: 1.4; }
+    .comment-section button {
+      padding: 10px 15px;
+      font-size: 1em;
+      cursor: pointer;
+      background-color: var(--button-bg);
+      color: var(--button-text);
+      border: none;
+      border-radius: 5px;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+    .comment-section button:hover {
+      transform: scale(1.03);
+      opacity: 0.95;
+    }
+    .comment-section button:disabled {
+      background-color: #999;
+      cursor: not-allowed;
+    }
+    .ad-section {
+      width: 100%;
+      max-width: 300px;
+      margin: 20px auto;
+      text-align: center;
+    }
+    .ad-section img {
+      width: 100%;
+      border-radius: 10px;
+      display: block;
+    }
+    .thank-card {
+      background: var(--card);
+      padding: 1.6rem;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto 2rem;
+      color: var(--text);
+    }
+    .thank-card h1 { margin: 0 0 12px 0; font-size: 22px; line-height: 1.15;}
+    .thank-card p.lead { margin: 0 0 18px 0; color: var(--muted); font-size: 15px;}
+    .stats { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 12px;}
+    .stat { background: rgba(0, 0, 0, 0.03); padding: 12px 14px; border-radius: 8px; min-width: 140px; flex: 1 1 140px;}
+    body.dark .stat { background: rgba(255, 255, 255, 0.02);}
+    .stat .label { display: block; font-size: 13px; color: var(--muted);margin-bottom: 6px;}
+    .stat .value { font-weight: 600; font-size: 18px; color: var(--text);}
+    .smw-container { margin: 0 auto; background: #fff; max-width: 600px; width: 100%; padding: 40px; border-radius: 22px; box-shadow: 0 4px 20px rgba(0,0,0,0.07); text-align: center; font-family: Arial, sans-serif;}
+    .smw-title { font-size: 2rem; margin-bottom: 12px; color: #111827; font-weight: 700; }
+    .smw-text { font-size: 1rem; color: #6b7280; margin-bottom: 28px; line-height: 1.6; }
+    .smw-button { display: inline-block; background: #ffdd00; color: #000; padding: 14px 28px; border-radius: 12px; font-size: 1.1rem; font-weight: bold; text-decoration: none; transition: transform 0.15s ease, opacity 0.15s ease;}
+    .smw-button:hover { transform: scale(1.05); opacity: 0.9;}
+    .smw-emoji { font-size: 1.3rem; margin-right: 6px;}
+    .subscribe-image-box { width: 100%; max-width: 400px; margin: 20px auto; text-align: center;}
+    .subscribe-image { width: 100%; border-radius: 10px; display: block; }
+    @media (min-width: 600px) {
+      footer nav { flex-direction: row; justify-content: center; gap: 1.5rem; }
+    }
+    @media (max-width: 480px) and (orientation: portrait) { .voice-sample-box {padding-bottom: 20px !important;} }
+    footer {
+      margin-top: 1rem;
+      background: var(--card);
+      padding: 0.8rem;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 3px 8px var(--shadow);
+    }
+    footer nav {
+      display: flex;
+      gap: 4rem;
+      justify-content: center;
+      align-items: center;
+    }
+    footer a {
+      font-size: 2rem;
+      color: var(--text);
+      text-decoration: none;
+      display: flex;
+      gap: 0.1rem;
+      align-items: center;
+      font-weight: 600;
+    }
   </style>
 </head>
 <body class="light">
@@ -260,13 +369,12 @@
       localStorage.setItem("theme", isDark ? "dark" : "light");
     });
 
-    // Comments system
+    // Comments logic
     const commentorName = document.getElementById('commentor-name');
     const commentText = document.getElementById('comment-text');
     const prevButton = document.getElementById('prev-button');
     const COMMENT_INTERVAL_MS = 5000;
     let comments = [], history = [], intervalId;
-
     async function loadComments() {
       try {
         const response = await fetch('Data/comments.txt');
@@ -321,7 +429,7 @@
     prevButton.addEventListener('click', viewPreviousComment);
     loadComments();
 
-    // Slider system
+    // Slider JS
     const movies = [
       { title: "Reverend Insanity", rating: "R+", genres: "Xianxia, Dark-fantasy, Isekai.", poster: "https://raw.githubusercontent.com/JOCRZ/notionpage/main/Data/RI.png", detailPage: "ri.html" },
       { title: "The Pefect Run", rating: "PG-13", genres: "Superpower, Action, Adventure.", poster: "https://raw.githubusercontent.com/JOCRZ/notionpage/main/Data/TPR.png", detailPage: "soon.html" },
