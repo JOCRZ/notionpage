@@ -1,14 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- =========================
+       META & TITLE
+  ========================== -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NovelWaveHz</title>
+
+  <!-- =========================
+       FAVICON
+  ========================== -->
   <link rel="icon" type="image/png" href="Data/NWheadlogo.png" />
+
+  <!-- =========================
+       EXTERNAL LIBRARIES
+       - Font Awesome (icons)
+       - Tailwind CSS
+       - Lucide (icons)
+  ========================== -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- =========================
+       GLOBAL STYLES (CSS)
+  ========================== -->
   <style>
+    /* ---------- THEME VARIABLES ---------- */
     :root {
       --bg: #f5f5f5;
       --card: #ffffff;
@@ -24,21 +43,9 @@
       --comment-highlight: #305caa;
       --max-width: 900px;
     }
-    body.dark {
-      --bg: #2e2e2e;
-      --card: #343434;
-      --text: #eef2f6;
-      --muted: #bfc6cd;
-      --accent: #99b7ff;
-      --button-bg: #d1d5db;
-      --button-text: #111827;
-      --play-blue: #1a73e8;
-      --shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
-      --comment-bg: #4b4b4b;
-      --comment-border: #666;
-      --comment-highlight: #99b7ff;
-    }
+
     * { box-sizing: border-box; }
+
     html, body {
       height: 100%;
       margin: 0;
@@ -53,6 +60,8 @@
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
+
+    /* ---------- MAIN LAYOUT ---------- */
     main {
       flex: 1;
       display: flex;
@@ -64,29 +73,34 @@
       animation: fadeIn 0.4s ease;
       width: calc(100% - 2rem);
     }
+
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px);}
-      to { opacity: 1; transform: none;}
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: none; }
     }
+
     .horizontal-scroll-wrapper { position: relative; }
 
-
+    /* ---------- SLIDER / HERO SECTION ---------- */
     #sliderArea {
       -webkit-overflow-scrolling: touch;
       scroll-behavior: smooth;
       scroll-snap-type: x mandatory;
       position: relative;
-      overflow: visible !important;   /* Show arrows outside the card */
+      overflow: visible !important; /* Show arrows outside the card */
     }
+
     #slideContent > * {
       scroll-snap-align: start;
     }
-    #prevBtn, #nextBtn {
+
+    #prevBtn,
+    #nextBtn {
       top: 50%;
       transform: translateY(-50%);
       position: absolute;
       box-shadow: var(--shadow);
-      background: rgba(255,255,255,0.93);
+      background: rgba(255, 255, 255, 0.93);
       border-radius: 50%;
       z-index: 10;
       border: none;
@@ -94,41 +108,25 @@
       cursor: pointer;
       transition: background 0.2s, transform 0.2s;
     }
-    #prevBtn:hover, #nextBtn:hover {
+
+    #prevBtn:hover,
+    #nextBtn:hover {
       background: #fff;
       transform: translateY(-50%) scale(1.12);
     }
-    #prevBtn {
-      left: -54px;
-    }
-    #nextBtn {
-      right: -54px;
-    }
-    #prevBtn i, #nextBtn i {
+
+    #prevBtn { left: -54px; }
+    #nextBtn { right: -54px; }
+
+    #prevBtn i,
+    #nextBtn i {
       width: 26px !important;
       height: 26px !important;
       color: #444;
       display: block;
     }
-    @media (max-width: 900px) {
-      #prevBtn { left: -30px; }
-      #nextBtn { right: -30px; }
-    }
-    @media (max-width: 600px) {
-      #sliderArea {
-        overflow-x: auto;
-        padding: 1rem 1.2rem !important;
-      }
-      #slideContent {
-        flex-wrap: nowrap;
-        gap: 24px !important;
-      }
-      #prevBtn, #nextBtn {
-        padding: 10px !important;
-      }
-      #prevBtn { left: -14px !important;}
-      #nextBtn { right: -14px !important;}
-    }
+
+    /* ---------- HEADER / NAVBAR ---------- */
     header {
       display: flex;
       justify-content: space-between;
@@ -141,15 +139,42 @@
       z-index: 100;
       transition: background-color 0.3s ease, box-shadow 0.3s ease;
     }
-    .logo-container { display: flex; align-items: center; gap: 0.6rem; }
-    .logo-container img { height: 58px; width: auto; transition: transform 0.25s ease; }
-    .logo-container:hover img { transform: scale(1.03);}
-    .logo-text { font-weight: 700; font-size: clamp(1.3rem, 2.2vw, 1.8rem); letter-spacing: 2px; color: var(--text);}
-    .actions-container { display: flex; align-items: center; gap: 1rem;}
-    header a i.fab.fa-youtube { font-size: 2rem; color: #FF0000;}
-    .theme-toggle { background: none; border: 2px solid var(--muted); color: var(--text); border-radius: 50%; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; cursor: pointer; transition: all 0.25s ease;}
-    .theme-toggle:hover { background-color: var(--muted); color: var(--bg);}
-    body.dark .theme-toggle:hover { background-color: var(--accent); color: var(--button-bg);}
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .logo-container img {
+      height: 58px;
+      width: auto;
+      transition: transform 0.25s ease;
+    }
+
+    .logo-container:hover img { transform: scale(1.03); }
+
+    .logo-text {
+      font-weight: 700;
+      font-size: clamp(1.3rem, 2.2vw, 1.8rem);
+      letter-spacing: 2px;
+      color: var(--text);
+    }
+
+    .actions-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    header a i.fab.fa-youtube {
+      font-size: 2rem;
+      color: #FF0000;
+    }
+
+    /* Removed theme-toggle button styles */
+
+    /* ---------- COMMENTS SECTION ---------- */
     .comment-section {
       background-color: var(--card);
       border-radius: 16px;
@@ -159,7 +184,12 @@
       text-align: center;
       transition: background-color 0.3s ease, box-shadow 0.3s ease;
     }
-    .comment-section h3 { color: var(--text); margin-bottom: 1rem;}
+
+    .comment-section h3 {
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
     #comment-container {
       width: 100%;
       max-width: 600px;
@@ -168,6 +198,7 @@
       align-items: center;
       justify-content: center;
     }
+
     #comment-card {
       width: 100%;
       padding: 18px 24px;
@@ -180,8 +211,20 @@
       align-items: flex-start;
       text-align: left;
     }
-    #commentor-name { font-weight: bold; font-size: 1.05em; color: var(--comment-highlight); margin-bottom: 8px; }
-    #comment-text { font-size: 1.02em; color: var(--text); line-height: 1.4; }
+
+    #commentor-name {
+      font-weight: bold;
+      font-size: 1.05em;
+      color: var(--comment-highlight);
+      margin-bottom: 8px;
+    }
+
+    #comment-text {
+      font-size: 1.02em;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
     .comment-section button {
       padding: 10px 15px;
       font-size: 1em;
@@ -192,25 +235,32 @@
       border-radius: 5px;
       transition: transform 0.2s ease, opacity 0.2s ease;
     }
+
     .comment-section button:hover {
       transform: scale(1.03);
       opacity: 0.95;
     }
+
     .comment-section button:disabled {
       background-color: #999;
       cursor: not-allowed;
     }
+
+    /* ---------- AD SECTION ---------- */
     .ad-section {
       width: 100%;
       max-width: 300px;
       margin: 20px auto;
       text-align: center;
     }
+
     .ad-section img {
       width: 100%;
       border-radius: 10px;
       display: block;
     }
+
+    /* ---------- THANK YOU / SUPPORT SECTION ---------- */
     .thank-card {
       background: var(--card);
       padding: 1.6rem;
@@ -221,25 +271,109 @@
       margin: 0 auto 2rem;
       color: var(--text);
     }
-    .thank-card h1 { margin: 0 0 12px 0; font-size: 22px; line-height: 1.15;}
-    .thank-card p.lead { margin: 0 0 18px 0; color: var(--muted); font-size: 15px;}
-    .stats { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 12px;}
-    .stat { background: rgba(0, 0, 0, 0.03); padding: 12px 14px; border-radius: 8px; min-width: 140px; flex: 1 1 140px;}
-    body.dark .stat { background: rgba(255, 255, 255, 0.02);}
-    .stat .label { display: block; font-size: 13px; color: var(--muted);margin-bottom: 6px;}
-    .stat .value { font-weight: 600; font-size: 18px; color: var(--text);}
-    .smw-container { margin: 0 auto; background: #fff; max-width: 600px; width: 100%; padding: 40px; border-radius: 22px; box-shadow: 0 4px 20px rgba(0,0,0,0.07); text-align: center; font-family: Arial, sans-serif;}
-    .smw-title { font-size: 2rem; margin-bottom: 12px; color: #111827; font-weight: 700; }
-    .smw-text { font-size: 1rem; color: #6b7280; margin-bottom: 28px; line-height: 1.6; }
-    .smw-button { display: inline-block; background: #ffdd00; color: #000; padding: 14px 28px; border-radius: 12px; font-size: 1.1rem; font-weight: bold; text-decoration: none; transition: transform 0.15s ease, opacity 0.15s ease;}
-    .smw-button:hover { transform: scale(1.05); opacity: 0.9;}
-    .smw-emoji { font-size: 1.3rem; margin-right: 6px;}
-    .subscribe-image-box { width: 100%; max-width: 400px; margin: 20px auto; text-align: center;}
-    .subscribe-image { width: 100%; border-radius: 10px; display: block; }
-    @media (min-width: 600px) {
-      footer nav { flex-direction: row; justify-content: center; gap: 1.5rem; }
+
+    .thank-card h1 {
+      margin: 0 0 12px 0;
+      font-size: 22px;
+      line-height: 1.15;
     }
-    @media (max-width: 480px) and (orientation: portrait) { .voice-sample-box {padding-bottom: 20px !important;} }
+
+    .thank-card p.lead {
+      margin: 0 0 18px 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .stats {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .stat {
+      background: rgba(0, 0, 0, 0.03);
+      padding: 12px 14px;
+      border-radius: 8px;
+      min-width: 140px;
+      flex: 1 1 140px;
+    }
+
+    .stat .label {
+      display: block;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .stat .value {
+      font-weight: 600;
+      font-size: 18px;
+      color: var(--text);
+    }
+
+    .smw-container {
+      margin: 0 auto;
+      background: #fff;
+      max-width: 600px;
+      width: 100%;
+      padding: 40px;
+      border-radius: 22px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+      text-align: center;
+      font-family: Arial, sans-serif;
+    }
+
+    .smw-title {
+      font-size: 2rem;
+      margin-bottom: 12px;
+      color: #111827;
+      font-weight: 700;
+    }
+
+    .smw-text {
+      font-size: 1rem;
+      color: #6b7280;
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    .smw-button {
+      display: inline-block;
+      background: #ffdd00;
+      color: #000;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      text-decoration: none;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    .smw-button:hover {
+      transform: scale(1.05);
+      opacity: 0.9;
+    }
+
+    .smw-emoji {
+      font-size: 1.3rem;
+      margin-right: 6px;
+    }
+
+    .subscribe-image-box {
+      width: 100%;
+      max-width: 400px;
+      margin: 20px auto;
+      text-align: center;
+    }
+
+    .subscribe-image {
+      width: 100%;
+      border-radius: 10px;
+      display: block;
+    }
+
+    /* ---------- FOOTER ---------- */
     footer {
       margin-top: 1rem;
       background: var(--card);
@@ -248,12 +382,14 @@
       text-align: center;
       box-shadow: 0 3px 8px var(--shadow);
     }
+
     footer nav {
       display: flex;
       gap: 4rem;
       justify-content: center;
       align-items: center;
     }
+
     footer a {
       font-size: 2rem;
       color: var(--text);
@@ -263,14 +399,53 @@
       align-items: center;
       font-weight: 600;
     }
-    @media (max-width: 600px) {
-  #prevBtn, #nextBtn {
-    display: none;
-  }
+
+    #dots {
+  margin-top: 50px; /* adjust px as needed */
 }
+
+    /* ---------- RESPONSIVE MEDIA QUERIES ---------- */
+    @media (min-width: 600px) {
+      footer nav {
+        flex-direction: row;
+        justify-content: center;
+        gap: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) and (orientation: portrait) {
+      .voice-sample-box { padding-bottom: 20px !important; }
+    }
+
+    @media (max-width: 900px) {
+      #prevBtn { left: -30px; }
+      #nextBtn { right: -30px; }
+    }
+
+    @media (max-width: 600px) {
+      #sliderArea {
+        overflow-x: auto;
+        padding: 1rem 1.2rem !important;
+      }
+      #slideContent {
+        flex-wrap: nowrap;
+        gap: 24px !important;
+      }
+      #prevBtn,
+      #nextBtn {
+        padding: 10px !important;
+        display: none; /* Hide arrows on small screens */
+      }
+      #prevBtn { left: -14px !important; }
+      #nextBtn { right: -14px !important; }
+    }
   </style>
 </head>
-<body class="light">
+
+<body>
+  <!-- =========================
+       HEADER
+  ========================== -->
   <header>
     <div class="logo-container">
       <img id="logo" src="Data/nwb.svg" alt="NovelWave Logo" />
@@ -280,27 +455,48 @@
       <a href="https://www.youtube.com/@NovelWaveHz/" target="_blank" rel="noopener noreferrer" aria-label="YouTube Channel">
         <i class="fab fa-youtube"></i>
       </a>
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+      <!-- Theme toggle button removed -->
     </div>
   </header>
+
+  <!-- =========================
+       MAIN CONTENT
+  ========================== -->
   <main>
+    <!-- ===== HERO / SLIDER SECTION ===== -->
     <div class="horizontal-scroll-wrapper" aria-label="Novel slider">
-      <div id="sliderArea" class="relative bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl overflow-visible p-2 md:p-8 max-w-5xl mx-auto">
+      <div
+        id="sliderArea"
+        class="relative bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl overflow-visible p-2 md:p-8 max-w-5xl mx-auto"
+      >
         <button id="prevBtn" aria-label="Previous item">
           <i data-lucide="chevron-left"></i>
         </button>
+
         <div id="slideContent" class="flex flex-row items-center gap-4 md:gap-16 max-w-5xl mx-auto"></div>
+
         <button id="nextBtn" aria-label="Next item">
           <i data-lucide="chevron-right"></i>
         </button>
+
         <div class="flex justify-center gap-2 pb-8" id="dots"></div>
       </div>
     </div>
-    <a href="https://www.youtube.com/@NovelWaveHz?sub_confirmation=1" target="_blank" rel="noopener noreferrer" class="subscribe-image-link" aria-label="Subscribe to NovelWaveHz channel">
+
+    <!-- ===== SUBSCRIBE IMAGE SECTION ===== -->
+    <a
+      href="https://www.youtube.com/@NovelWaveHz?sub_confirmation=1"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="subscribe-image-link"
+      aria-label="Subscribe to NovelWaveHz channel"
+    >
       <div class="subscribe-image-box">
         <img src="Data/sub.png" alt="Subscribe Button" class="subscribe-image" />
       </div>
     </a>
+
+    <!-- ===== COMMENTS SECTION ===== -->
     <section class="comment-section" aria-labelledby="comments-heading">
       <h3 id="comments-heading">@NovelWaveHz Comments</h3>
       <div id="comment-container">
@@ -312,25 +508,47 @@
       <button id="prev-button" disabled aria-label="View Previous Comment">View Previous Comment</button>
     </section>
   </main>
+
+  <!-- =========================
+       ADVERTISEMENT
+  ========================== -->
   <div class="ad-section" aria-label="Advertisement">
     <a href="https://elevenreader.io/referral/a4KMjhx6" target="_blank" rel="noopener noreferrer">
       <img src="Data/ad.jpg" alt="Advertisement" />
     </a>
   </div>
+
+  <!-- =========================
+       THANK YOU & SUPPORT
+  ========================== -->
   <section class="thank-card" aria-labelledby="thank-heading">
     <h1 id="thank-heading">Thank you for your support</h1>
-    <p class="lead">I want to express my sincere gratitude to everyone who used referral link.</p>
+    <p class="lead">
+      I want to express my sincere gratitude to everyone who used referral link.
+    </p>
+
     <div class="stats" role="list" aria-label="Referral statistics">
-      <div class="stat" role="listitem"><span class="label">Total Referrals</span><span class="value">6</span></div>
-      <div class="stat" role="listitem"><span class="label">Listening Hours Earned</span><span class="value">30</span></div>
-      <div class="stat" role="listitem"><span class="label">Projected Chapters</span><span class="value">150</span></div>
-      <div class="stat" role="listitem"><span class="label">Estimated Savings</span>
+      <div class="stat" role="listitem">
+        <span class="label">Total Referrals</span>
+        <span class="value">6</span>
+      </div>
+      <div class="stat" role="listitem">
+        <span class="label">Listening Hours Earned</span>
+        <span class="value">30</span>
+      </div>
+      <div class="stat" role="listitem">
+        <span class="label">Projected Chapters</span>
+        <span class="value">150</span>
+      </div>
+      <div class="stat" role="listitem">
+        <span class="label">Estimated Savings</span>
         <div class="value">
           <span class="usd">USD: <strong>$10.66</strong></span><br />
           <span class="inr">INR: <strong>₹888</strong></span>
         </div>
       </div>
     </div>
+
     <div class="smw-container">
       <h1 class="smw-title">Support My Work</h1>
       <p class="smw-text">
@@ -338,118 +556,196 @@
         <br />Your contribution no matter the amount truly makes a difference.
         <br />If you value the content, please consider supporting the channel.
       </p>
-      <a class="smw-button" href="https://buymeacoffee.com/Jo3416" target="_blank" rel="noopener noreferrer">
+      <a
+        class="smw-button"
+        href="https://buymeacoffee.com/Jo3416"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <span class="smw-emoji">☕</span>Buy Me a Coffee
       </a>
     </div>
   </section>
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
   <footer>
     <nav aria-label="Social media navigation">
-      <a href="https://www.youtube.com/@NovelWaveHz/" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-      <a href="https://www.instagram.com/novelwavehz" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-      <a href="mailto:proxyac31@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
-      <a href="https://buymeacoffee.com/Jo3416" target="_blank" rel="noopener noreferrer" aria-label="Buy Me a Coffee"><i class="fas fa-mug-hot"></i></a>
+      <a
+        href="https://www.youtube.com/@NovelWaveHz/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="YouTube"
+      >
+        <i class="fab fa-youtube"></i>
+      </a>
+      <a
+        href="https://www.instagram.com/novelwavehz"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Instagram"
+      >
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="mailto:proxyac31@gmail.com" aria-label="Email">
+        <i class="fas fa-envelope"></i>
+      </a>
+      <a
+        href="https://buymeacoffee.com/Jo3416"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Buy Me a Coffee"
+      >
+        <i class="fas fa-mug-hot"></i>
+      </a>
     </nav>
   </footer>
+
+  <!-- =========================
+       SCRIPTS
+       1) Comments logic
+       2) Slider logic
+  ========================== -->
   <script>
-    const toggleBtn = document.getElementById("themeToggle");
-    const body = document.body;
-    const logo = document.getElementById("logo");
+    // -------------------------
+    // 1) COMMENTS LOGIC
+    // -------------------------
+    const commentorName = document.getElementById("commentor-name");
+    const commentText = document.getElementById("comment-text");
+    const prevButton = document.getElementById("prev-button");
 
-
-    function applyTheme(isDark) {
-      if (isDark) {
-        body.classList.add("dark");
-        toggleBtn.textContent = "☀️";
-        logo.src = "Data/nww.svg";
-      } else {
-        body.classList.remove("dark");
-        toggleBtn.textContent = "🌙";
-        logo.src = "Data/nwb.svg";
-      }
-    }
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") applyTheme(true);
-    toggleBtn.addEventListener("click", () => {
-      const isDark = !body.classList.contains("dark");
-      applyTheme(isDark);
-      localStorage.setItem("theme", isDark ? "dark" : "light");
-    });
-
-
-    // Comments logic
-    const commentorName = document.getElementById('commentor-name');
-    const commentText = document.getElementById('comment-text');
-    const prevButton = document.getElementById('prev-button');
     const COMMENT_INTERVAL_MS = 5000;
-    let comments = [], history = [], intervalId;
+    let comments = [];
+    let history = [];
+    let intervalId;
+
     async function loadComments() {
       try {
-        const response = await fetch('Data/comments.txt');
+        const response = await fetch("Data/comments.txt");
         const text = await response.text();
-        comments = text.split('\n').map(line => {
-          let [commentor, ...commentParts] = line.split(':');
-          return {commentor: commentor ? commentor.trim() : '',commentText: commentParts.join(':').trim()};
-        }).filter(c => c.commentor && c.commentText);
+
+        comments = text
+          .split("\n")
+          .map((line) => {
+            let [commentor, ...commentParts] = line.split(":");
+            return {
+              commentor: commentor ? commentor.trim() : "",
+              commentText: commentParts.join(":").trim(),
+            };
+          })
+          .filter((c) => c.commentor && c.commentText);
+
         if (comments.length === 0) {
-          commentorName.textContent = "No comments found.";commentText.textContent = "";return;
+          commentorName.textContent = "No comments found.";
+          commentText.textContent = "";
+          return;
         }
+
         startCommentRotation();
       } catch (error) {
         commentorName.textContent = "Error loading comments.";
-        commentText.textContent = "Make sure 'comments.txt' exists and is accessible.";
+        commentText.textContent =
+          "Make sure 'comments.txt' exists and is accessible.";
       }
     }
+
     function displayRandomComment() {
       if (comments.length === 0) return;
+
       let randomIndex = Math.floor(Math.random() * comments.length);
       let previousIndex = history.length > 0 ? history[history.length - 1] : -1;
-      while (randomIndex === previousIndex && comments.length > 1) {randomIndex = Math.floor(Math.random() * comments.length);}
+
+      while (randomIndex === previousIndex && comments.length > 1) {
+        randomIndex = Math.floor(Math.random() * comments.length);
+      }
+
       history.push(randomIndex);
       if (history.length > 10) history.shift();
+
       setComment(comments[randomIndex]);
       updatePrevButtonState();
     }
+
     function setComment(comment) {
       commentorName.textContent = comment.commentor;
       commentText.textContent = comment.commentText;
     }
+
     function viewPreviousComment() {
       if (history.length <= 1) return;
-      history.pop();
+
+      history.pop(); // remove current
       const previousIndex = history.pop();
+
       if (previousIndex !== undefined) {
         history.push(previousIndex);
         setComment(comments[previousIndex]);
       }
+
       updatePrevButtonState();
       resetCommentRotation();
     }
-    function updatePrevButtonState() {prevButton.disabled = history.length <= 1;}
+
+    function updatePrevButtonState() {
+      prevButton.disabled = history.length <= 1;
+    }
+
     function startCommentRotation() {
       displayRandomComment();
       intervalId = setInterval(displayRandomComment, COMMENT_INTERVAL_MS);
     }
+
     function resetCommentRotation() {
       clearInterval(intervalId);
       intervalId = setInterval(displayRandomComment, COMMENT_INTERVAL_MS);
     }
-    prevButton.addEventListener('click', viewPreviousComment);
+
+    prevButton.addEventListener("click", viewPreviousComment);
     loadComments();
 
-
-    // Slider JS
+    // -------------------------
+    // 2) SLIDER / HERO LOGIC
+    // -------------------------
     const movies = [
-      { title: "Reverend Insanity", status: "Ongoing", poster: "https://raw.githubusercontent.com/JOCRZ/notionpage/main/Data/RI.png", detailPage: "ri.html" },
-      { title: "The Perfect Run", status: "Completed", poster: "https://raw.githubusercontent.com/JOCRZ/notionpage/main/Data/TPR.png", detailPage: "soon.html" },
-      { title: "Omniscent Reader's View Point", status: "Ongoing", poster: "https://raw.githubusercontent.com/JOCRZ/notionpage/main/Data/ORV.jpg", detailPage: "soon.html" },
-      { title: "Shadow Slave", status: "Ongoing", poster: "https://raw.githubusercontent.com/JOCRZ/notionpage/main/Data/SS.jpg", detailPage: "soon.html" }
+      {
+        title: "Reverend Insanity",
+        status: "Ongoing",
+        poster:
+          "https://raw.githubusercontent.com/JOCRZ/notionpage/main/Data/RI.png",
+        detailPage: "ri.html",
+      },
+      {
+        title: "The Perfect Run",
+        status: "Comming Soon",
+        poster:
+          "https://raw.githubusercontent.com/JOCRZ/notionpage/main/Data/TPR.png",
+        detailPage: "soon.html",
+      },
+      {
+        title: "Omniscent Reader's View Point",
+        status: "On Hold",
+        poster:
+          "https://raw.githubusercontent.com/JOCRZ/notionpage/main/Data/ORV.jpg",
+        detailPage: "soon.html",
+      },
+      {
+        title: "Shadow Slave",
+        status: "On Hold",
+        poster:
+          "https://raw.githubusercontent.com/JOCRZ/notionpage/main/Data/SS.jpg",
+        detailPage: "soon.html",
+      },
     ];
+
     let currentSlide = 0;
     const slideContent = document.getElementById("slideContent");
     const dotsContainer = document.getElementById("dots");
+    const sliderArea = document.getElementById("sliderArea");
+
     function renderSlide() {
       const m = movies[currentSlide];
+
       slideContent.innerHTML = `
         <div class="flex-1 text-center md:text-left space-y-3 md:space-y-6">
           <h1 class="text-2xl md:text-7xl font-bold text-gray-900">${m.title}</h1>
@@ -461,32 +757,67 @@
           <div class="relative group">
             <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
             <a href="${m.detailPage}" aria-label="View details for ${m.title}">
-              <img src="${m.poster}" alt="${m.title}"
-              class="w-32 h-48 md:w-80 md:h-[480px] object-cover rounded-2xl shadow-2xl transition-transform duration-300 group-hover:scale-105" />
+              <img
+                src="${m.poster}"
+                alt="${m.title}"
+                class="w-32 h-48 md:w-80 md:h-[480px] object-cover rounded-2xl shadow-2xl transition-transform duration-300 group-hover:scale-105"
+              />
             </a>
           </div>
         </div>
       `;
-      renderDots(); lucide.createIcons();
+
+      renderDots();
+      lucide.createIcons();
     }
+
     function renderDots() {
-      dotsContainer.innerHTML = movies.map((_, i) =>
-        `<button onclick="goToSlide(${i})" class="h-2 rounded-full transition-all duration-300 ${i===currentSlide?"w-8 bg-black":"w-2 bg-gray-400 hover:bg-gray-600"}"></button>`
-      ).join("");
+      dotsContainer.innerHTML = movies
+        .map(
+          (_, i) => `
+          <button
+            onclick="goToSlide(${i})"
+            class="h-2 rounded-full transition-all duration-300 ${
+              i === currentSlide ? "w-8 bg-black" : "w-2 bg-gray-400 hover:bg-gray-600"
+            }"
+          ></button>
+        `
+        )
+        .join("");
     }
-    function nextSlide() {currentSlide = (currentSlide + 1) % movies.length;renderSlide();}
-    function prevSlide() {currentSlide = (currentSlide - 1 + movies.length) % movies.length;renderSlide();}
-    function goToSlide(index) {currentSlide = index;renderSlide();}
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % movies.length;
+      renderSlide();
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + movies.length) % movies.length;
+      renderSlide();
+    }
+
+    function goToSlide(index) {
+      currentSlide = index;
+      renderSlide();
+    }
+
     document.getElementById("nextBtn").onclick = nextSlide;
     document.getElementById("prevBtn").onclick = prevSlide;
+
+    // Touch swipe for mobile
     let startX = 0;
-    const sliderArea = document.getElementById("sliderArea");
-    sliderArea.addEventListener("touchstart",(e)=>{startX = e.touches[0].clientX;});
-    sliderArea.addEventListener("touchend",(e)=>{
+
+    sliderArea.addEventListener("touchstart", (e) => {
+      startX = e.touches[0].clientX;
+    });
+
+    sliderArea.addEventListener("touchend", (e) => {
       const endX = e.changedTouches[0].clientX;
       if (startX - endX > 50) nextSlide();
       if (endX - startX > 50) prevSlide();
     });
+
+    // Initial render
     renderSlide();
   </script>
 </body>
