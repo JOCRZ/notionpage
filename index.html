@@ -6,11 +6,8 @@
   <title>NovelWaveHz</title>
 
   <link rel="icon" type="image/png" href="Data/NWheadlogo.png" />
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
   <script src="https://cdn.tailwindcss.com"></script>
-
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
@@ -292,14 +289,12 @@
       text-align: center;
       box-shadow: 0 3px 8px var(--shadow);
     }
-
     footer nav {
       display: flex;
       gap: 4rem;
       justify-content: center;
       align-items: center;
     }
-
     footer a {
       font-size: 2rem;
       color: var(--text);
@@ -409,10 +404,8 @@
         logo.src = "Data/nwb.svg"; // Path for black logo in light mode
       }
     }
-    
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "dark") applyTheme(true);
-    
     toggleBtn.addEventListener("click", () => {
       const isDark = !body.classList.contains("dark");
       applyTheme(isDark);
@@ -425,6 +418,7 @@
     const prevButton = document.getElementById('prev-button');
     const COMMENT_INTERVAL_MS = 5000;
     let comments = [], history = [], intervalId;
+
     async function loadComments() {
       try {
         const response = await fetch('Data/comments.txt');
@@ -481,25 +475,28 @@
 
     // Slider with responsive fixes for mobile
     const movies = [
-  {
-    title: "Reverend Insanity",
-    rating: "R+",
-    genres: "Xianxia, Dark-fantasy, Psychological, Isekai, Action.",
-    poster: "https://raw.githubusercontent.com/JOCRZ/notionpage/main/Data/RI.png"
-  },
-  {
-    title: "The Omniscent Reader's View Point",
-    rating: "PG-13",
-    genres: "Reverse-Isekai, Apocalypse, Fantasy, Action, Adventure.",
-    poster: "https://raw.githubusercontent.com/JOCRZ/notionpage/main/Data/ORV.png"
-  },
-  {
-    title: "Shadow Slave",
-    rating: "PG-13",
-    genres: "Post-Apocalyptic, Action, Adventure, System, Romance.",
-    poster: "https://raw.githubusercontent.com/JOCRZ/notionpage/main/Data/SS.jpg"
-  }
-];
+      {
+        title: "Reverend Insanity",
+        rating: "R+",
+        genres: "Xianxia, Dark-fantasy, Psychological, Isekai, Action.",
+        poster: "https://raw.githubusercontent.com/JOCRZ/notionpage/main/Data/RI.png",
+        detailPage: "ri.html"
+      },
+      {
+        title: "The Omniscent Reader's View Point",
+        rating: "PG-13",
+        genres: "Reverse-Isekai, Apocalypse, Fantasy, Action, Adventure.",
+        poster: "https://raw.githubusercontent.com/JOCRZ/notionpage/main/Data/ORV.png",
+        detailPage: "omniscient-reader.html"
+      },
+      {
+        title: "Shadow Slave",
+        rating: "PG-13",
+        genres: "Post-Apocalyptic, Action, Adventure, System, Romance.",
+        poster: "https://raw.githubusercontent.com/JOCRZ/notionpage/main/Data/SS.jpg",
+        detailPage: "shadow-slave.html"
+      }
+    ];
     let currentSlide = 0;
     const slideContent = document.getElementById("slideContent");
     const dotsContainer = document.getElementById("dots");
@@ -517,8 +514,10 @@
         <div class="flex-shrink-0">
           <div class="relative group">
             <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
-            <img src="${m.poster}" alt="${m.title}"
+            <a href="${m.detailPage}" aria-label="View details for ${m.title}">
+              <img src="${m.poster}" alt="${m.title}"
               class="w-32 h-48 md:w-80 md:h-[480px] object-cover rounded-2xl shadow-2xl transition-transform duration-300 group-hover:scale-105" />
+            </a>
           </div>
         </div>
       `;
